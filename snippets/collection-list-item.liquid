@@ -17,7 +17,7 @@
       Hide the last product for a better mobile view
     {% endcomment %}
     <div class="grid__item small--one-half medium-up--one-fifth{% if forloop.index == 4 %} small--hide{% endif %}">
-      {% include 'product-card', product: product %}
+      {% include 'product-card', product: product, collection: featured_collection %}
     </div>
   {% endfor %}
 </div>

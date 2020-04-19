@@ -39,7 +39,7 @@
   <div class="page-width text-center">
     <header class="giftcard__header" role="banner">
       <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
-        <a href="/" itemprop="url">{{ shop.name }}</a>
+        <a href="{{ shop.url }}" itemprop="url">{{ shop.name }}</a>
       </h1>
       <div class="giftcard__shop-url">{{ shop.url | escape }}</div>
     </header>
@@ -51,7 +51,7 @@
         {% unless gift_card.enabled %}
           <span class="giftcard__tag">{{ 'gift_cards.issued.disabled' | t }}</span>
         {% endunless %}
-        {% assign gift_card_expiry_date = gift_card.expires_on | date: "%d/%m/%y" %}
+        {% assign gift_card_expiry_date = gift_card.expires_on | date: format: 'basic' %}
         {% if gift_card.expired and gift_card.enabled %}
            <span class="giftcard__tag">{{ 'gift_cards.issued.expired' | t: expiry: gift_card_expiry_date }}</span>
         {% endif %}

@@ -95,7 +95,7 @@
 
           <p>
             <button type="button" class="text-link link-accent-color address-edit-toggle" data-form-id="{{ address.id }}">{{ 'customer.addresses.edit' | t }}</button>
-            <button type="button" class="text-link link-accent-color address-delete" data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">{{ 'customer.addresses.delete' | t }}</button>
+            <button type="button" class="text-link link-accent-color address-delete" data-address-url="{{ address.url }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">{{ 'customer.addresses.delete' | t }}</button>
           </p>
 
           <div id="EditAddress_{{ address.id }}" class="hide form-vertical">
@@ -183,7 +183,7 @@
   {% endif %}
 
   <div class="full-width full-width--return-link">
-    <a href="/account" class="h1 return-link">
+    <a href="{{ routes.account_url }}" class="h1 return-link">
       {% include 'icon-arrow-thin-left' %}
       {{ 'customer.account.return' | t }}
     </a>
