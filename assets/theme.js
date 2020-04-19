@@ -847,14 +847,11 @@ theme.Hero = (function() {
     isPaused: 'is-paused'
   };
 
-  function Hero(sectionId) {
+  function Hero() {
     this.namespace = '.hero';
-    this.$hero = $(sectionId);
-    this.$wrapper = this.$hero.closest(selectors.heroWrapper);
-    this.$heroContent = this.$wrapper.find(selectors.heroContent);
-    this.$heroPause = this.$wrapper.find(selectors.heroPause);
-    this.$heroControlsArrow = this.$wrapper.find(selectors.heroControlsArrow);
-    this.$heroAdapt = this.$wrapper.find(selectors.heroAdapt);
+    this.$hero = $(selectors.hero);
+    this.$heroContent = $(selectors.heroContent);
+    this.$heroPause = $(selectors.heroPause);
 
     this.$hero.on('init' + this.namespace, this._a11y.bind(this));
     this.$hero.on('init' + this.namespace, this._arrowsInit.bind(this));
@@ -890,20 +887,29 @@ theme.Hero = (function() {
       $(window).resize($.debounce(50, this._setSlideshowHeight.bind(this)));
     }
 
-    this.$heroPause.on('click' + this.namespace, this._togglePause.bind(this));
+    this.$heroPause.on(
+      'click' + this.namespace,
+      function() {
+        if (this.$heroPause.hasClass(classes.isPaused)) {
+          this._play();
+        } else {
+          this._pause();
+        }
+      }.bind(this)
+    );
   }
 
   Hero.prototype = _.assignIn({}, Hero.prototype, {
     _setSlideshowHeight: function() {
       var minAspectRatio = this.$hero.data('min-aspect-ratio');
-      this.$hero.height(this.$heroAdapt.width() / minAspectRatio);
+      this.$hero.height($(selectors.heroAdapt).width() / minAspectRatio);
     },
 
     _countSlide: function(event, slick, currentSlide) {
       // currentSlide is undefined on init,
       // set it to 0 in this case (currentSlide is 0 based)
       var activeSlide = (currentSlide ? currentSlide : 0) + 1;
-      var $heroControlsCount = this.$wrapper.find(selectors.heroControlsCount);
+      var $heroControlsCount = $(selectors.heroControlsCount);
 
       if (slick.slideCount > 1) {
         $heroControlsCount.attr(
@@ -921,8 +927,8 @@ theme.Hero = (function() {
       // set it to 0 in this case (currentSlide is 0 based)
       // eslint-disable-next-line
       var currentSlide = currentSlide || 0;
-      var $heroControlsText = this.$wrapper.find(selectors.heroControlsText);
-      var $heroTitle = this.$wrapper.find(selectors.heroTitle);
+      var $heroControlsText = $(selectors.heroControlsText);
+      var $heroTitle = $(selectors.heroTitle);
 
       if (slick.slideCount > 1) {
         var $currentTitle = $heroTitle.filter(
@@ -947,22 +953,24 @@ theme.Hero = (function() {
       this.$heroContent.addClass(classes.heroContentActive);
     },
 
-    _togglePause: function() {
-      if (this.$heroPause.hasClass(classes.isPaused)) {
-        var labelPause = this.$heroPause.data('label-pause');
-        this.$heroPause.removeClass(classes.isPaused).attr({
-          'aria-pressed': 'false',
-          'aria-label': labelPause
-        });
-        this.play();
-      } else {
-        var labelPlay = this.$heroPause.data('label-play');
-        this.$heroPause.addClass(classes.isPaused).attr({
-          'aria-pressed': 'true',
-          'aria-label': labelPlay
-        });
-        this.pause();
-      }
+    _pause: function() {
+      var labelPlay = this.$heroPause.data('label-play');
+
+      this.$hero.slick('slickPause');
+      this.$heroPause.addClass(classes.isPaused).attr({
+        'aria-pressed': 'true',
+        'aria-label': labelPlay
+      });
+    },
+
+    _play: function() {
+      var labelPause = this.$heroPause.data('label-pause');
+
+      this.$hero.slick('slickPlay');
+      this.$heroPause.removeClass(classes.isPaused).attr({
+        'aria-pressed': 'false',
+        'aria-label': labelPause
+      });
     },
 
     _a11y: function(event, obj) {
@@ -986,7 +994,7 @@ theme.Hero = (function() {
 
             this.$heroContent.attr('aria-live', 'polite');
             if (autoplay) {
-              this.pause();
+              this.$hero.slick('slickPause');
             }
           }.bind(this)
         )
@@ -1003,7 +1011,7 @@ theme.Hero = (function() {
             if (autoplay && !this.$heroPause.hasClass(classes.isPaused)) {
               // Only resume playing if the user hasn't paused using the pause
               // button
-              this.play();
+              this.$hero.slick('slickPlay');
             }
           }.bind(this)
         )
@@ -1014,7 +1022,7 @@ theme.Hero = (function() {
       // Slider is initialized. Setup custom arrows
       var count = obj.slideCount;
       var $slider = obj.$slider;
-      var $arrows = this.$heroControlsArrow;
+      var $arrows = $(selectors.heroControlsArrow);
 
       if ($arrows.length && count > 1) {
         $arrows.on(
@@ -1066,12 +1074,10 @@ theme.Hero = (function() {
     },
 
     pause: function() {
-      if (!this.$hero.data('autoplay')) return;
       this.$hero.slick('slickPause');
     },
 
     play: function() {
-      if (!this.$hero.data('autoplay')) return;
       this.$hero.slick('slickPlay');
     },
 
@@ -1079,9 +1085,9 @@ theme.Hero = (function() {
       this.$hero.off(this.namespace);
       this.$heroContent.off(this.namespace);
       this.$heroPause.off(this.namespace);
-      this.$wrapper.off(this.namespace);
-      this.$heroControlsArrow.off(this.namespace);
-      this.$heroAdapt.off(this.namespace);
+      $(selectors.heroWrapper).off(this.namespace);
+      $(selectors.heroControlsArrow).off(this.namespace);
+      $(selectors.heroAdapt).off(this.namespace);
 
       this.$hero.slick('unslick');
     }
@@ -1526,9 +1532,7 @@ window.QtySelector = (function() {
       $subtotal: $('#CartSubtotal'),
       $discountTotal: $('#cartDiscountTotal'),
       $cartTable: $('.cart-table'),
-      $cartTemplate: $('#CartProducts'),
-      $cartFooter: $('#CartFooter'),
-      $cartFooterTemplate: $('#CartFooterTemplate')
+      $cartTemplate: $('#CartProducts')
     };
 
     this.settings = {
@@ -1747,34 +1751,6 @@ window.QtySelector = (function() {
         });
       }
 
-      if (cartItem.line_level_discount_allocations.length !== 0) {
-        for (var discount in cartItem.line_level_discount_allocations) {
-          var amount =
-            cartItem.line_level_discount_allocations[discount].amount;
-
-          cartItem.line_level_discount_allocations[
-            discount
-          ].formattedAmount = theme.Currency.formatMoney(
-            amount,
-            theme.moneyFormat
-          );
-        }
-      }
-
-      var unitPrice = null;
-      if (cartItem.unit_price_measurement) {
-        unitPrice = {
-          addRefererenceValue:
-            cartItem.unit_price_measurement.reference_value !== 1,
-          price: theme.Currency.formatMoney(
-            cartItem.unit_price,
-            theme.moneyFormat
-          ),
-          reference_value: cartItem.unit_price_measurement.reference_value,
-          reference_unit: cartItem.unit_price_measurement.reference_unit
-        };
-      }
-
       // Create item's data object and add to 'items' array
       item = {
         key: cartItem.key,
@@ -1787,18 +1763,17 @@ window.QtySelector = (function() {
         itemQty: cartItem.quantity,
         price: theme.Currency.formatMoney(cartItem.price, theme.moneyFormat),
         vendor: cartItem.vendor,
-        unitPrice: unitPrice,
         linePrice: theme.Currency.formatMoney(
-          cartItem.final_line_price,
+          cartItem.line_price,
           theme.moneyFormat
         ),
         originalLinePrice: theme.Currency.formatMoney(
           cartItem.original_line_price,
           theme.moneyFormat
         ),
-        discounts: cartItem.line_level_discount_allocations,
+        discounts: cartItem.discounts,
         discountsApplied:
-          cartItem.line_level_discount_allocations.length === 0 ? false : true
+          cartItem.line_price === cartItem.original_line_price ? false : true
       };
 
       items.push(item);
@@ -1810,46 +1785,30 @@ window.QtySelector = (function() {
     };
     this.cache.$cartTemplate.empty().append(template(data));
 
-    this.updateCartFooter(cart);
-
     // Create new quantity selectors
     this.cache.$cartTable.find('input[type="number"]').each(function(i, el) {
       new QtySelector($(el));
     });
 
-    // Set focus on cart table
-    slate.a11y.pageLinkFocus(this.cache.$cartTable);
-  };
+    // Update the cart subtotal
+    this.cache.$subtotal.html(
+      theme.Currency.formatMoney(cart.total_price, theme.moneyFormat)
+    );
 
-  QtySelector.prototype.updateCartFooter = function(cart) {
-    if (cart.cart_level_discount_applications.length !== 0) {
-      for (var cartDiscount in cart.cart_level_discount_applications) {
-        var cartAmount =
-          cart.cart_level_discount_applications[cartDiscount]
-            .total_allocated_amount;
-
-        cart.cart_level_discount_applications[
-          cartDiscount
-        ].formattedAmount = theme.Currency.formatMoney(
-          cartAmount,
-          theme.moneyFormat
-        );
-      }
+    // Update the cart total discounts
+    if (cart.total_discount > 0) {
+      this.cache.$discountTotal.html(
+        theme.strings.totalCartDiscount.replace(
+          '[savings]',
+          theme.Currency.formatMoney(cart.total_discount, theme.moneyFormat)
+        )
+      );
+    } else {
+      this.cache.$discountTotal.empty();
     }
 
-    var source = this.cache.$cartFooterTemplate.html();
-    var template = Handlebars.compile(source);
-    var data = {
-      totalPrice: theme.Currency.formatMoney(
-        cart.total_price,
-        theme.moneyFormat
-      ),
-      cartDiscounts: cart.cart_level_discount_applications,
-      cartDiscountsApplied:
-        cart.cart_level_discount_applications.length === 0 ? false : true
-    };
-
-    this.cache.$cartFooter.empty().append(template(data));
+    // Set focus on cart table
+    slate.a11y.pageLinkFocus(this.cache.$cartTable);
   };
 
   return QtySelector;
@@ -2435,13 +2394,6 @@ theme.headerNav = (function() {
     sizeNav();
     initMegaNavs();
     initHeaderSearch();
-
-    // Re-execute sizeNav after the page is fully loaded
-    // so it gets the correct width after the custom typeface is loaded.
-    var mql = window.matchMedia('(min-width: 750px)');
-    if (mql.matches) {
-      $(window).on('load', sizeNav);
-    }
     $(window).on('resize.headernav', $.debounce(250, sizeNav));
   }
 
@@ -2613,7 +2565,7 @@ theme.customerTemplates = (function() {
 
     $('.address-delete').on('click', function() {
       var $el = $(this);
-      var addressUrl = $el.data('address-url');
+      var formId = $el.data('form-id');
       var confirmMessage = $el.data('confirm-message');
 
       // eslint-disable-next-line no-alert
@@ -2622,7 +2574,7 @@ theme.customerTemplates = (function() {
           confirmMessage || 'Are you sure you wish to delete this address?'
         )
       ) {
-        Shopify.postLink(addressUrl, {
+        Shopify.postLink('/account/addresses/' + formId, {
           parameters: { _method: 'delete' }
         });
       }
@@ -2707,15 +2659,18 @@ theme.Filters = (function() {
 
   Filters.prototype = _.assignIn({}, Filters.prototype, {
     _onFilterChange: function() {
-      location.href = this.$filterSelect.val();
+      delete Shopify.queryParams.page;
+      if ($.isEmptyObject(Shopify.queryParams)) {
+        location.href = this.$filterSelect.val();
+      } else {
+        location.href =
+          this.$filterSelect.val() + '?' + $.param(Shopify.queryParams);
+      }
     },
 
     _onSortChange: function() {
       Shopify.queryParams.sort_by = this.$sortSelect.val();
-      if (Shopify.queryParams.page) {
-        delete Shopify.queryParams.page;
-      }
-      location.search = decodeURIComponent($.param(Shopify.queryParams));
+      location.search = $.param(Shopify.queryParams);
     },
 
     onUnload: function() {
@@ -2757,10 +2712,7 @@ theme.Product = (function() {
       saleTag: '#ProductSaleTag-' + sectionId,
       productStock: '#ProductStock-' + sectionId,
       singleOptionSelector: '.single-option-selector-' + sectionId,
-      shopifyPaymentButton: '.shopify-payment-button',
-      unitPrice: '[data-unit-price]',
-      unitPriceBaseUnit: '[data-unit-price-base-unit]',
-      unitPriceContainer: '[data-unit-price-container]'
+      shopifyPaymentButton: '.shopify-payment-button'
     };
 
     this.settings = $.extend({}, defaults, {
@@ -2833,7 +2785,7 @@ theme.Product = (function() {
 
       this.$container.on(
         'variantChange' + this.settings.namespace,
-        this._updateVariantChange.bind(this)
+        this._updateAddToCartBtn.bind(this)
       );
       this.$container.on(
         'variantPriceChange' + this.settings.namespace,
@@ -2909,7 +2861,7 @@ theme.Product = (function() {
       $stock.addClass('hide');
     },
 
-    _updateVariantChange: function(evt) {
+    _updateAddToCartBtn: function(evt) {
       var variant = evt.variant;
 
       var cache = {
@@ -2933,25 +2885,6 @@ theme.Product = (function() {
           $(this.selectors.shopifyPaymentButton, this.$container).hide();
           // Update when stock will be available
           this._updateIncomingInfo(variant);
-        }
-
-        $(this.selectors.unitPriceContainer, this.$container).addClass('hide');
-
-        if (variant.unit_price_measurement) {
-          var $unitPrice = $(this.selectors.unitPrice, this.$container);
-          var $unitPriceBaseUnit = $(
-            this.selectors.unitPriceBaseUnit,
-            this.$container
-          );
-
-          $unitPrice.html(
-            theme.Currency.formatMoney(variant.unit_price, theme.moneyFormat)
-          );
-          $unitPriceBaseUnit.html(this._getBaseUnit(variant));
-
-          $(this.selectors.unitPriceContainer, this.$container).removeClass(
-            'hide'
-          );
         }
       } else {
         cache.$addToCart.prop('disabled', true).removeClass('btn--sold-out');
@@ -2988,13 +2921,6 @@ theme.Product = (function() {
       } else {
         $(this.selectors.comparePrice).addClass('hide');
       }
-    },
-
-    _getBaseUnit: function(variant) {
-      return variant.unit_price_measurement.reference_value === 1
-        ? variant.unit_price_measurement.reference_unit
-        : variant.unit_price_measurement.reference_value +
-            variant.unit_price_measurement.reference_unit;
     },
 
     _updateSKU: function(evt) {
@@ -3271,29 +3197,23 @@ theme.Product = (function() {
   return Product;
 })();
 
-theme.slideshows = {};
-
 theme.Slideshow = (function() {
-  function Slideshow(container) {
-    this.$container = $(container);
-    var sectionId = this.$container.attr('data-section-id');
-    this.slideshow = '#Slideshow-' + sectionId;
-
-    theme.slideshows[this.slideshow] = new theme.Hero(this.slideshow);
+  function Slideshow() {
+    this.slideshow = new theme.Hero();
   }
 
   Slideshow.prototype = _.assignIn({}, Slideshow.prototype, {
     onUnload: function() {
-      theme.slideshows[this.slideshow].destroy();
+      this.slideshow.destroy();
     },
 
     onSelect: function() {
-      theme.slideshows[this.slideshow].pause();
+      this.slideshow.pause();
       theme.Notify.adaptNotification();
     },
 
     onDeselect: function() {
-      theme.slideshows[this.slideshow].play();
+      this.slideshow.play();
     },
 
     onBlockSelect: function(evt) {
@@ -3302,12 +3222,12 @@ theme.Slideshow = (function() {
       );
       var slideIndex = $slide.data('slick-index');
 
-      theme.slideshows[this.slideshow].pause();
-      theme.slideshows[this.slideshow].goToSlide(slideIndex);
+      this.slideshow.pause();
+      this.slideshow.goToSlide(slideIndex);
     },
 
     onBlockDeselect: function() {
-      theme.slideshows[this.slideshow].play();
+      this.slideshow.play();
     }
   });
 
@@ -3792,31 +3712,6 @@ theme.CollectionsList = (function() {
   return CollectionsList;
 })();
 
-theme.ProductRecommendations = (function() {
-  function ProductRecommendations(container) {
-    this.$container = $(container);
-
-    var baseUrl = this.$container.data('baseUrl');
-    var productId = this.$container.data('productId');
-    var recommendationsSectionUrl =
-      baseUrl +
-      '?section_id=product-recommendations&product_id=' +
-      productId +
-      '&limit=6';
-
-    $.get(recommendationsSectionUrl).then(
-      function(section) {
-        var recommendationsMarkup = $(section).html();
-        if (recommendationsMarkup.trim() !== '') {
-          this.$container.html(recommendationsMarkup);
-        }
-      }.bind(this)
-    );
-  }
-
-  return ProductRecommendations;
-})();
-
 
 theme.init = function() {
   theme.customerTemplates.init();
@@ -3846,12 +3741,10 @@ theme.init = function() {
   sections.register('quotes', theme.Quotes);
   sections.register('video', theme.Video);
   sections.register('collections-list', theme.CollectionsList);
-  sections.register('product-recommendations', theme.ProductRecommendations);
 
   // Standalone modules
   $(window).on('load', theme.articleImages);
   theme.passwordModalInit();
-  theme.productCardImageLoadingAnimation();
 };
 
 theme.articleImages = function() {
@@ -3889,43 +3782,6 @@ theme.passwordModalInit = function() {
   if ($loginModal.find('.errors').length) {
     theme.PasswordModal.open();
   }
-};
-
-theme.productCardImageLoadingAnimation = function() {
-  var selectors = {
-    image: '[data-image]',
-    imagePlaceholder: '[data-image-placeholder]',
-    imageWithPlaceholderWrapper: '[data-image-with-placeholder-wrapper]'
-  };
-
-  var classes = {
-    hidden: 'placeholder-background--hide'
-  };
-
-  $(document).on('lazyloaded', function(e) {
-    var $target = $(e.target);
-
-    if (!$target.is(selectors.image)) {
-      return;
-    }
-
-    $target
-      .closest(selectors.imageWithPlaceholderWrapper)
-      .find(selectors.imagePlaceholder)
-      .addClass(classes.hidden);
-  });
-
-  // When the theme loads, lazysizes might load images before the "lazyloaded"
-  // event listener has been attached. When this happens, the following function
-  // hides the loading placeholders.
-  function onLoadHideLazysizesAnimation() {
-    $(selectors.image + '.lazyloaded')
-      .closest(selectors.imageWithPlaceholderWrapper)
-      .find(selectors.imagePlaceholder)
-      .addClass(classes.hidden);
-  }
-
-  onLoadHideLazysizesAnimation();
 };
 
 $(theme.init);

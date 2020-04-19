@@ -6,7 +6,7 @@
 
 <div id="NavDrawer" class="drawer drawer--left">
   <div class="drawer__inner">
-    <form action="{{ routes.search_url }}" method="get" class="drawer__search" role="search">
+    <form action="/search" method="get" class="drawer__search" role="search">
       <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}" class="drawer__search-input">
 
       <button type="submit" class="text-link drawer__search-submit">
@@ -59,18 +59,18 @@
       {% if shop.customer_accounts_enabled %}
         {% if customer %}
           <li class="drawer__nav-item">
-            <a href="{{ routes.account_url }}" class="drawer__nav-link drawer__nav-link--top-level">
+            <a href="/account" class="drawer__nav-link drawer__nav-link--top-level">
               {{ 'layout.customer.account' | t }}
             </a>
           </li>
           <li class="drawer__nav-item">
-            <a href="{{ routes.account_logout_url }}" class="drawer__nav-link drawer__nav-link--top-level">
+            <a href="/account/logout" class="drawer__nav-link drawer__nav-link--top-level">
               {{ 'layout.customer.log_out' | t }}
             </a>
           </li>
         {% else %}
           <li class="drawer__nav-item">
-            <a href="{{ routes.account_login_url }}" class="drawer__nav-link drawer__nav-link--top-level">
+            <a href="/account/login" class="drawer__nav-link drawer__nav-link--top-level">
               {{ 'layout.customer.account' | t }}
             </a>
           </li>
@@ -81,6 +81,43 @@
 </div>
 
 <header class="site-header page-element is-moved-by-drawer" role="banner" data-section-id="{{ section.id }}" data-section-type="header">
+  	<div id="NotificationSuccess" class="notification notification--success" aria-hidden="true">
+        <div class="page-width notification__inner notification__inner--has-link">
+          <a href="/cart" class="notification__link">
+            <span class="notification__message">{{ 'products.product.product_added_to_cart_html' | t }}</span>
+          </a>
+          <button type="button" class="text-link notification__close">
+            {% include 'icon-close' %}
+            <span class="icon__fallback-text">{{ 'cart.general.close_notification' | t }}</span>
+          </button>
+        </div>
+      </div>
+      <div id="NotificationError" class="notification notification--error" aria-hidden="true">
+        <div class="page-width notification__inner">
+          <span class="notification__message notification__message--error" aria-live="assertive" aria-atomic="true"></span>
+          <button type="button" class="text-link notification__close">
+            {% include 'icon-close' %}
+            <span class="icon__fallback-text">{{ 'cart.general.close_notification' | t }}</span>
+          </button>
+        </div>
+      </div>
+  {% if section.settings.promo_bar_enable %}
+    <div id="NotificationPromo" class="notification notification--promo" data-text="{{ section.settings.promo_bar_text | strip_html | handle }}">
+      <div class="page-width notification__inner {% if section.settings.promo_bar_link != blank %} notification__inner--has-link{% endif %}">
+        {% if section.settings.promo_bar_link != blank %}
+          <a href="{{ section.settings.promo_bar_link }}" class="notification__link">
+            <span class="notification__message">{{ section.settings.promo_bar_text | escape }}</span>
+          </a>
+        {% else %}
+          <span class="notification__message">{{ section.settings.promo_bar_text | escape }}</span>
+        {% endif %}
+        <button type="button" class="text-link notification__close" id="NotificationPromoClose">
+          {% include 'icon-close' %}
+          <span class="icon__fallback-text">{{ 'cart.general.close_notification' | t }}</span>
+        </button>
+      </div>
+    </div>
+  {% endif %}
   <div class="site-header__upper page-width">
     <div class="grid grid--table">
       <div class="grid__item small--one-quarter medium-up--hide">
@@ -95,14 +132,14 @@
         </button>
       </div>
       <div class="grid__item small--one-half medium-up--two-thirds small--text-center">
-        {% if request.page_type == 'index' %}
+        {% if template.name == 'index' %}
           <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
         {% else %}
           <div class="site-header__logo h1" itemscope itemtype="http://schema.org/Organization">
         {% endif %}
           {% if section.settings.logo != blank %}
             {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
-            <a href="{{ routes.root_url }}" itemprop="url" class="site-header__logo-link">
+            <a href="/" itemprop="url" class="site-header__logo-link">
               <img src="{{ section.settings.logo | img_url: image_size }}"
                    srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
                    alt="{{ section.settings.logo.alt | default: shop.name }}"
@@ -110,9 +147,9 @@
             </a>
           {% else %}
             {% assign shop_name_length = shop.name.size %}
-            <a href="{{ routes.root_url }}" itemprop="url" {% if shop_name_length > 10 %} class="site-header__shop-name--small"{% endif %}>{{ shop.name }}</a>
+            <a href="/" itemprop="url" {% if shop_name_length > 10 %} class="site-header__shop-name--small"{% endif %}>{{ shop.name }}</a>
           {% endif %}
-        {% if request.page_type == 'index' %}
+        {% if template.name == 'index' %}
           </h1>
         {% else %}
           </div>
@@ -120,8 +157,9 @@
       </div>
 
       <div class="grid__item small--one-quarter medium-up--one-third text-right">
+        
         <div id="SiteNavSearchCart" class="site-header__search-cart-wrapper">
-          <form action="{{ routes.search_url }}" method="get" class="site-header__search small--hide" role="search">
+          <form action="/search" method="get" class="site-header__search small--hide" role="search">
             {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
               <label for="SiteNavSearch" class="visually-hidden">{{ 'general.search.placeholder' | t }}</label>
               <input type="search" name="q" id="SiteNavSearch" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}" class="site-header__search-input">
@@ -132,7 +170,7 @@
             </button>
           </form>
 
-          <a href="{{ routes.cart_url }}" class="site-header__link site-header__cart">
+          <a href="/cart" class="site-header__link site-header__cart">
             {% include 'icon-cart' %}
             <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
             <span class="site-header__cart-indicator {% if cart.item_count == 0 %}hide{% endif %}"></span>
@@ -203,7 +241,7 @@
               {% if shop.customer_accounts_enabled %}
                 <div class="customer-login-links sticky-hidden">
                   {% if customer %}
-                    <a href="{{ routes.account_url }}">
+                    <a href="/account">
                       {{ 'layout.customer.account' | t }}
                     </a>
                     {{ 'layout.customer.log_out' | t | customer_logout_link }}
@@ -216,277 +254,133 @@
           </div>
         </div>
       </nav>
-      <div id="NotificationSuccess" class="notification notification--success" aria-hidden="true">
-        <div class="page-width notification__inner notification__inner--has-link">
-          <a href="{{ routes.cart_url }}" class="notification__link">
-            <span class="notification__message">{{ 'products.product.product_added_to_cart_html' | t }}</span>
-          </a>
-          <button type="button" class="text-link notification__close">
-            {% include 'icon-close' %}
-            <span class="icon__fallback-text">{{ 'cart.general.close_notification' | t }}</span>
-          </button>
-        </div>
-      </div>
-      <div id="NotificationError" class="notification notification--error" aria-hidden="true">
-        <div class="page-width notification__inner">
-          <span class="notification__message notification__message--error" aria-live="assertive" aria-atomic="true"></span>
-          <button type="button" class="text-link notification__close">
-            {% include 'icon-close' %}
-            <span class="icon__fallback-text">{{ 'cart.general.close_notification' | t }}</span>
-          </button>
-        </div>
-      </div>
     </div>
   </div>
 
-  {% if section.settings.promo_bar_enable and section.settings.promo_bar_text != blank %}
-    <div id="NotificationPromo" class="notification notification--promo" data-text="{{ section.settings.promo_bar_text | strip_html | handle }}">
-      <div class="page-width notification__inner {% if section.settings.promo_bar_link != blank %} notification__inner--has-link{% endif %}">
-        {% if section.settings.promo_bar_link != blank %}
-          <a href="{{ section.settings.promo_bar_link }}" class="notification__link">
-            <span class="notification__message">{{ section.settings.promo_bar_text | escape }}</span>
-          </a>
-        {% else %}
-          <span class="notification__message">{{ section.settings.promo_bar_text | escape }}</span>
-        {% endif %}
-        <button type="button" class="text-link notification__close" id="NotificationPromoClose">
-          {% include 'icon-close' %}
-          <span class="icon__fallback-text">{{ 'cart.general.close_notification' | t }}</span>
-        </button>
-      </div>
-    </div>
-  {% endif %}
+  
 </header>
+
+
 
 {% schema %}
 {
   "name": {
-    "da": "Overskrift",
     "de": "Titel",
     "en": "Header",
     "es": "Encabezado",
-    "fi": "Ylätunniste",
     "fr": "En-tête",
-    "hi": "हैडर",
     "it": "Header",
     "ja": "ヘッダー",
-    "ko": "머리글",
-    "nb": "Header",
-    "nl": "Koptekst",
-    "pt-BR": "Cabeçalho",
-    "pt-PT": "Cabeçalho",
-    "sv": "Rubrik",
-    "th": "ส่วนหัว",
-    "zh-CN": "标头",
-    "zh-TW": "標頭"
+    "pt-BR": "Cabeçalho"
   },
   "settings": [
     {
       "type": "image_picker",
       "id": "logo",
       "label": {
-        "da": "Logobillede",
         "de": "Logo-Foto",
         "en": "Logo image",
         "es": "Logotipo",
-        "fi": "Logokuva",
         "fr": "Image du logo",
-        "hi": "लोगो इमेज",
         "it": "Immagine del logo",
         "ja": "ロゴ画像",
-        "ko": "로고 이미지",
-        "nb": "Logobilde",
-        "nl": "Afbeelding van logo",
-        "pt-BR": "Imagem do logotipo",
-        "pt-PT": "Imagem do logótipo",
-        "sv": "Logobild",
-        "th": "รูปภาพโลโก้",
-        "zh-CN": "logo 图片",
-        "zh-TW": "標誌圖片"
+        "pt-BR": "Imagem do logotipo"
       }
     },
     {
       "type": "text",
       "id": "logo_max_width",
       "label": {
-        "da": "Tilpasset logobredde (i pixels)",
         "de": "Benutzerdefinierte Logobreite (Pixel)",
         "en": "Custom logo width (in pixels)",
         "es": "Ancho del logotipo personalizado (en píxeles)",
-        "fi": "Mukautettu logon leveys (pikseleinä)",
         "fr": "Largeur personnalisée du logo (en pixels)",
-        "hi": "कस्टम लोगो की चौड़ाई (पिक्सेल)",
         "it": "Larghezza logo personalizzato (in pixel)",
-        "ja": "ロゴの幅をカスタマイズする (ピクセル単位)",
-        "ko": "사용자 지정 로고 폭 (픽셀)",
-        "nb": "Tilpasset logobredde (i piksler)",
-        "nl": "Aangepaste logobreedte (in pixels)",
-        "pt-BR": "Largura do logotipo personalizado (em pixels)",
-        "pt-PT": "Largura de logótipo personalizada (em píxeis)",
-        "sv": "Anpassad logotypbredd (i pixlar)",
-        "th": "ความกว้างของโลโก้แบบกำหนดเอง (เป็นพิกเซล)",
-        "zh-CN": "自定义 logo 宽度（像素）",
-        "zh-TW": "自訂標誌寬度 (單位為像素)"
+        "ja": "ロゴの幅をカスタムする（ピクセルで）",
+        "pt-BR": "Largura do logotipo personalizado (em pixels)"
       },
       "default": {
-        "da": "450",
         "de": "450",
         "en": "450",
         "es": "450",
-        "fi": "450",
         "fr": "450",
-        "hi": "450",
         "it": "450",
         "ja": "450",
-        "ko": "450",
-        "nb": "450",
-        "nl": "450",
-        "pt-BR": "450",
-        "pt-PT": "450",
-        "sv": "450",
-        "th": "450",
-        "zh-CN": "450",
-        "zh-TW": "450"
+        "pt-BR": "450"
       }
     },
     {
       "type": "link_list",
       "id": "main_linklist",
       "label": {
-        "da": "Menu",
         "de": "Menü",
         "en": "Menu",
         "es": "Menú",
-        "fi": "Valikko",
         "fr": "Menu",
-        "hi": "मेनू",
         "it": "Menu",
         "ja": "メニュー",
-        "ko": "메뉴",
-        "nb": "Meny",
-        "nl": "Menu",
-        "pt-BR": "Menu",
-        "pt-PT": "Menu",
-        "sv": "Meny",
-        "th": "เมนู",
-        "zh-CN": "菜单",
-        "zh-TW": "選單"
+        "pt-BR": "Menu"
       },
       "default": "main-menu"
     },
     {
       "type": "header",
       "content": {
-        "da": "Meddelelseslinje",
         "de": "Ankündigungsleiste",
         "en": "Announcement bar",
         "es": "Barra de anuncios",
-        "fi": "Ilmoituspalkki",
         "fr": "Barre d'annonces",
-        "hi": "घोषणा बार",
         "it": "Barra degli annunci",
         "ja": "告知バー",
-        "ko": "공지 표시줄",
-        "nb": "Kunngjøringslinje",
-        "nl": "Aankondigingsbalk",
-        "pt-BR": "Barra de avisos",
-        "pt-PT": "Barra de comunicado",
-        "sv": "Meddelandefält",
-        "th": "แถบประกาศ",
-        "zh-CN": "公告栏",
-        "zh-TW": "公告列"
+        "pt-BR": "Barra de anúncio"
       }
     },
     {
       "type": "checkbox",
       "id": "promo_bar_enable",
       "label": {
-        "da": "Vis meddelelse",
         "de": "Ankündigung anzeigen",
         "en": "Show announcement",
         "es": "Mostrar anuncio",
-        "fi": "Näytä ilmoitus",
         "fr": "Afficher l'annonce",
-        "hi": "घोषणा डिखाएं",
         "it": "Mostra annuncio",
         "ja": "告知を表示する",
-        "ko": "공지 표시",
-        "nb": "Vis kunngjøring",
-        "nl": "Aankondiging weergeven",
-        "pt-BR": "Exibir anúncio",
-        "pt-PT": "Mostrar comunicado",
-        "sv": "Visa tillkännagivande",
-        "th": "แสดงประกาศ",
-        "zh-CN": "显示公告",
-        "zh-TW": "顯示公告"
+        "pt-BR": "Exibir anúncio"
       }
     },
     {
       "type": "text",
       "id": "promo_bar_text",
       "label": {
-        "da": "Tekst",
         "de": "Text",
         "en": "Text",
         "es": "Texto",
-        "fi": "Teksti",
         "fr": "Texte",
-        "hi": "टेक्स्ट",
         "it": "Testo",
         "ja": "テキスト",
-        "ko": "텍스트",
-        "nb": "Tekst",
-        "nl": "Tekst",
-        "pt-BR": "Texto",
-        "pt-PT": "Texto",
-        "sv": "Text",
-        "th": "ข้อความ",
-        "zh-CN": "文本",
-        "zh-TW": "文字"
+        "pt-BR": "Texto"
       }
     },
     {
       "type": "url",
       "id": "promo_bar_link",
       "label": {
-        "da": "Link",
         "de": "Link",
         "en": "Link",
         "es": "Enlace",
-        "fi": "Linkki",
         "fr": "Lien",
-        "hi": "लिंक",
         "it": "Link",
         "ja": "リンク",
-        "ko": "링크",
-        "nb": "Kobling",
-        "nl": "Link",
-        "pt-BR": "Link",
-        "pt-PT": "Ligação",
-        "sv": "Länk",
-        "th": "ลิงก์",
-        "zh-CN": "链接",
-        "zh-TW": "連結"
+        "pt-BR": "Link"
       },
       "info": {
-        "da": "Valgfri",
         "de": "Optional",
         "en": "Optional",
         "es": "Opcional",
-        "fi": "Valinnainen",
         "fr": "Facultatif",
-        "hi": "वैकल्पिक",
         "it": "Facoltativo",
-        "ja": "オプション",
-        "ko": "선택 사항",
-        "nb": "Valgfritt",
-        "nl": "Optioneel",
-        "pt-BR": "Opcional",
-        "pt-PT": "Opcional",
-        "sv": "Valfritt",
-        "th": "ไม่จำเป็น",
-        "zh-CN": "可选",
-        "zh-TW": "(選填)"
+        "ja": "選択させる",
+        "pt-BR": "Opcional"
       }
     }
   ]

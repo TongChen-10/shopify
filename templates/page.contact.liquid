@@ -22,7 +22,7 @@
         <div class="grid grid--half-gutters">
           <div class="grid__item medium-up--one-half">
             <label for="ContactFormName" class="label--hidden">{{ 'contact.form.name' | t }}</label>
-            <input type="text" id="ContactFormName" name="contact[{{ 'contact.form.name' | t }}]" placeholder="{{ 'contact.form.name' | t }}" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            <input type="text" id="ContactFormName" name="contact[name]" placeholder="{{ 'contact.form.name' | t }}" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
           </div>
           <div class="grid__item medium-up--one-half">
             <label for="ContactFormEmail" class="label--hidden">{{ 'contact.form.email' | t }}</label>
@@ -31,10 +31,10 @@
         </div>
 
         <label for="ContactFormPhone" class="label--hidden">{{ 'contact.form.phone' | t }}</label>
-        <input type="tel" id="ContactFormPhone" name="contact[{{ 'contact.form.phone' | t }}]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+        <input type="tel" id="ContactFormPhone" name="contact[phone]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
 
         <label for="ContactFormMessage" class="label--hidden">{{ 'contact.form.message' | t }}</label>
-        <textarea rows="10" id="ContactFormMessage" name="contact[{{ 'contact.form.message' | t }}]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        <textarea rows="10" id="ContactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
 
         <input type="submit" class="btn" value="{{ 'contact.form.send' | t }}">
       {% endform %}

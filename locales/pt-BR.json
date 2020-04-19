@@ -3,9 +3,7 @@
     "accessibility": {
       "skip_to_content": "Pular para o conteúdo",
       "close_modal": "Fechar (Esc)",
-      "refresh_page": "Escolher uma seleção resulta em uma atualização de página inteira.",
-      "selection_help": "Pressione a tecla de espaço e as teclas de seta para fazer uma seleção.",
-      "unit_price_separator": "por"
+      "refresh_page": "escolher uma seleção resulta em uma atualização de página inteira"
     },
     "meta": {
       "tags": "Marcado \"{{ tags }}\"",
@@ -23,16 +21,16 @@
       "login_form_submit": "Entrar",
       "signup_form_email_label": "E-mail",
       "signup_form_success": "Nós lhe enviaremos um e-mail logo antes de lançar a loja!",
-      "admin_link_html": "Você é o titular da loja? <a href=\"/admin\" class=\"text-link\">Entre aqui</a>",
+      "admin_link_html": "Você é o(a) dono(a) da loja? <a href=\"/admin\" class=\"text-link\">Entre aqui</a>",
       "password_link": "Entre usando a senha",
-      "powered_by_shopify_html": "Esta loja será lançada com tecnologia da {{ shopify }}"
+      "powered_by_shopify_html": "Esta loja será lançada com a tecnologia da {{ shopify }}"
     },
     "social": {
       "share_title": "Compartilhar",
       "alt_text": {
         "share_on_facebook": "Compartilhar no Facebook",
-        "share_on_twitter": "Tuitar",
-        "share_on_pinterest": "Incluir como pin no Pinterest"
+        "share_on_twitter": "Tweetar",
+        "share_on_pinterest": "Pin no Pinterest"
       }
     },
     "newsletter_form": {
@@ -58,13 +56,13 @@
       "navigation": "Navegação do site"
     },
     "payment": {
-      "method": "Formas de pagamento"
+      "method": "Métodos de Pagamento"
     }
   },
   "blogs": {
     "article": {
       "tags": "Tags",
-      "view_all": "Ler tudo",
+      "view_all": "Ver tudo",
       "all_tags": "Todos",
       "read_more": "Saiba mais",
       "back_to_blog": "Voltar para {{ title }}"
@@ -75,9 +73,9 @@
       "email": "E-mail",
       "message": "Mensagem",
       "post": "Postar comentário",
-      "moderated": "Os comentários precisam ser aprovados antes de serem publicados",
-      "success_moderated": "Seu comentário foi publicado. Nós o publicaremos em alguns instantes, já que o nosso blog é moderado.",
-      "success": "Seu comentário foi publicado.",
+      "moderated": "Os comentários devem ser aprovados antes de serem publicados",
+      "success_moderated": "Seu comentário foi postado com sucesso. Nós o publicaremos em alguns instantes, já que o nosso blog é moderado.",
+      "success": "Seu comentário foi postado com sucesso! Obrigado!",
       "with_count": {
         "one": "{{ count }} comentário",
         "other": "{{ count }} comentários"
@@ -111,13 +109,13 @@
   },
   "collections": {
     "general": {
-      "view_all": "Visualizar tudo",
+      "view_all": "Ver tudo",
       "all_of_collection": "Todos",
       "no_matches": "Desculpe, não há produtos nesta coleção",
       "link_title": "Navegue na nossa coleção {{ title }}"
     },
     "sorting": {
-      "title": "Organizar por",
+      "title": "Ordenar por",
       "title_tags": "Filtrar por",
       "all_of_collection": "Todos"
     }
@@ -136,7 +134,7 @@
     "account": {
       "title": "Minha conta",
       "details": "Informações da conta",
-      "view_addresses": "Visualizar endereços",
+      "view_addresses": "Ver endereços",
       "return": "Retornar às informações da conta"
     },
     "activate_account": {
@@ -158,9 +156,9 @@
       "address1": "Endereço 1",
       "address2": "Endereço 2",
       "city": "Cidade",
-      "country": "País/região",
+      "country": "País",
       "province": "Província/Estado",
-      "zip": "CEP",
+      "zip": "Código postal/CEP",
       "phone": "Telefone",
       "set_default": "Definir como endereço padrão",
       "add": "Adicionar endereço",
@@ -175,7 +173,7 @@
       "email": "E-mail",
       "password": "Senha",
       "forgot_password": "Esqueceu sua senha?",
-      "sign_in": "Fazer login",
+      "sign_in": "Entrar",
       "guest_title": "Continuar como convidado",
       "guest_continue": "Continuar"
     },
@@ -193,7 +191,7 @@
       "date": "Efetuado em {{ date }}",
       "cancelled": "Pedido cancelado em {{ date }}",
       "cancelled_reason": "Motivo: {{ reason }}",
-      "billing_address": "Endereço de faturamento",
+      "billing_address": "Endereço de cobrança",
       "payment_status": "Status do pagamento",
       "shipping_address": "Endereço de entrega",
       "fulfillment_status": "Status de processamento do pedido",
@@ -237,14 +235,14 @@
     "hero": {
       "next_slide": "Próximo slide",
       "previous_slide": "Slide anterior",
-      "pause_slideshow": "Pausar apresentação de slides",
-      "play_slideshow": "Reproduzir apresentação de slides",
-      "navigation_instructions": "Utilize as setas esquerda/direita para navegar pela apresentação de slides, ou deslize para a esquerda/direita se estiver usando um dispositivo móvel",
+      "pause_slideshow": "Pausar slideshow",
+      "play_slideshow": "Reproduzir slideshow",
+      "navigation_instructions": "Utilize as setas esquerda/direita para navegar pelo slideshow, ou deslize para a esquerda/direita se estiver usando um dispositivo móvel",
       "slide_number": "Slide {{ slide_number }}, atual"
     },
     "onboarding": {
-      "blog_title": "Título de seu post",
-      "product_title": "Exemplo de título do produto",
+      "blog_title": "Título da sua postagem",
+      "product_title": "Exemplo de título de produto",
       "collection_title": "Título da coleção",
       "no_content": "Atualmente, esta seção não possui nenhum conteúdo. Adicione conteúdo a esta seção usando a barra lateral."
     }
@@ -281,22 +279,21 @@
       "quantity": "Quantidade",
       "add_to_cart": "Adicionar ao carrinho",
       "full_details": "Informações completas",
-      "view": "Visualizar",
+      "view": "Ver",
       "stock_available": {
         "one": "{{ count }} disponível",
         "other": "{{ count }} disponíveis"
       },
       "collection_return": "Voltar para {{ collection }}",
-      "product_added_to_cart_html": "Item adicionado ao carrinho. <span>Visualizar carrinho e finalizar compra</span>.",
-      "stock_unavailable": "O item não pôde ser adicionado a seu carrinho porque não há suficiente em estoque.",
-      "unit_price_label": "Preço unitário"
+      "product_added_to_cart_html": "Item adicionado ao carrinho. <span>Ver carrinho e finalizar compra</span>.",
+      "stock_unavailable": "O item não pôde ser adicionado a seu carrinho porque não há suficiente em estoque."
     }
   },
   "gift_cards": {
     "issued": {
       "title_html": "Aqui está o seu cartão-presente de {{ value }} para {{ shop }}!",
       "subtext": "Aqui está o seu cartão-presente!",
-      "disabled": "Desabilitado",
+      "disabled": "Desativado",
       "expired": "Expirado em {{ expiry }}",
       "active": "Expira em {{ expiry }}",
       "redeem": "Para resgatar o seu cartão-presente, utilize este código no fechamento do pedido",
@@ -306,13 +303,16 @@
       "add_to_apple_wallet": "Adicionar ao Apple Wallet"
     }
   },
+  "date_formats": {
+    "month_day_year": "%d de %B de %Y"
+  },
   "sections": {
     "map": {
       "get_directions": "Obter direções",
       "address_error": "Não é possível localizar o endereço",
       "address_no_results": "Nenhum resultado para este endereço",
       "address_query_limit_html": "Você excedeu a cota de uso da API do Google. Considere a atualização para um <a href=\"https://developers.google.com/maps/premium/usage-limits\">Plano Premium</a>.",
-      "auth_error_html": "Houve um problema ao autenticar sua chave da API do Google Maps."
+      "auth_error_html": "Ocorreu um problema ao autenticar sua chave da API do Google Maps."
     }
   },
   "video": {

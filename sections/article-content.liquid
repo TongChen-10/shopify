@@ -50,7 +50,7 @@
         <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="link-body-color"><strong>{{ tag }}</strong></a>{% if forloop.last %} - {% else %}, {% endif %}
       {% endfor %}
     {% endif %}
-    {{ article.published_at | time_tag: format: 'date' }}
+    {{ article.published_at | time_tag: format: 'month_day_year' }}
   </p>
 
   <h1 class="h2">{{ article.title }}</h1>
@@ -158,48 +158,26 @@
 {% schema %}
 {
   "name": {
-    "da": "Artikelindhold",
     "de": "Artikelinhalt",
     "en": "Article content",
     "es": "Contenido del artículo",
-    "fi": "Artikkelisisältö",
     "fr": "Contenu de l'article",
-    "hi": "लेख की सामग्री",
     "it": "Contenuto articolo",
     "ja": "記事の内容",
-    "ko": "문서 콘텐츠",
-    "nb": "Artikkelinnhold",
-    "nl": "Artikelcontent",
-    "pt-BR": "Conteúdo do artigo",
-    "pt-PT": "Conteúdo do artigo",
-    "sv": "Artikelinnehåll",
-    "th": "เนื้อหาของบทความ",
-    "zh-CN": "文章内容",
-    "zh-TW": "文章內容"
+    "pt-BR": "Conteúdo do artigo"
   },
   "settings": [
     {
       "type": "checkbox",
       "id": "social_sharing_blog",
       "label": {
-        "da": "Aktivér deling af blogopslag",
         "de": "Freigabe von Blog-Beiträgen aktivieren",
         "en": "Enable blog post sharing",
         "es": "Habilitar la función compartir entrada en el blog",
-        "fi": "Ota blogipäivitysten jakaminen käyttöön",
         "fr": "Activer le partage des articles de blog",
-        "hi": "ब्लॉग पोस्ट साझाकरण सक्षम करें",
         "it": "Abilita condivisione articoli del blog",
         "ja": "ブログ記事の共有を有効にする",
-        "ko": "블로그 게시물 공유 사용",
-        "nb": "Aktiver deling av blogginnlegg",
-        "nl": "Delen van blogpost inschakelen",
-        "pt-BR": "Habilitar compartilhamento de post do blog",
-        "pt-PT": "Ativar partilha da publicação no blogue",
-        "sv": "Aktivera blogginläggsdelning",
-        "th": "เปิดใช้การแชร์โพสต์บล็อก",
-        "zh-CN": "启用博客文章分享",
-        "zh-TW": "啟用部落格貼文分享"
+        "pt-BR": "Ativar compartilhamento de postagem de blog"
       },
       "default": true
     }

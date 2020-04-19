@@ -3,9 +3,7 @@
     "accessibility": {
       "skip_to_content": "Passer au contenu",
       "close_modal": "Fermer (Esc)",
-      "refresh_page": "Le choix d'une sélection entraîne l'actualisation d'une page entière.",
-      "selection_help": "Appuyez sur la touche espace puis sur les touches fléchées pour faire une sélection.",
-      "unit_price_separator": "par"
+      "refresh_page": "le choix d'une sélection entraîne une actualisation complète de la page"
     },
     "meta": {
       "tags": "Mots clés \"{{ tags }}\"",
@@ -58,7 +56,7 @@
       "navigation": "Navigation"
     },
     "payment": {
-      "method": "Moyens de paiement"
+      "method": "Méthodes de paiement"
     }
   },
   "blogs": {
@@ -87,7 +85,7 @@
   "cart": {
     "general": {
       "title": "Panier",
-      "remove": "Supprimer",
+      "remove": "Retirer",
       "note": "Instructions spéciales pour la commande",
       "taxes_and_shipping_at_checkout": "Taxes et frais de port calculés à la caisse",
       "taxes_and_shipping_policy_at_checkout_html": "Taxes et <a href=\"{{ link }}\">frais de port</a> calculés à la caisse",
@@ -158,7 +156,7 @@
       "address1": "Adresse 1",
       "address2": "Adresse 2",
       "city": "Ville",
-      "country": "Pays/région",
+      "country": "Pays",
       "province": "Province",
       "zip": "Code postal",
       "phone": "Téléphone",
@@ -186,7 +184,7 @@
       "payment_status": "Statut du paiement",
       "fulfillment_status": "Statut du traitement de la commande",
       "total": "Total",
-      "none": "Vous n'avez pas encore passé commande."
+      "none": "Vous n'avez pas placé de commande à ce jour."
     },
     "order": {
       "title": "Commande {{ name }}",
@@ -207,7 +205,7 @@
       "total": "Total",
       "fulfilled_at": "Traitée le {{ date }}",
       "subtotal": "Sous-total",
-      "track_shipment": "Suivre l'envoi"
+      "track_shipment": "Retracer l'envoi"
     },
     "recover_password": {
       "title": "Réinitialiser votre mot de passe",
@@ -288,8 +286,7 @@
       },
       "collection_return": "Retour à {{ collection }}",
       "product_added_to_cart_html": "Article ajouté au panier. <span>Voir le panier et passer à la caisse</span>.",
-      "stock_unavailable": "L'article n'a pu être ajouté à votre panier car il n'y en a pas assez en stock.",
-      "unit_price_label": "Prix unitaire"
+      "stock_unavailable": "L'article n'a pu être ajouté à votre panier car il n'y en a pas assez en stock."
     }
   },
   "gift_cards": {
@@ -305,6 +302,9 @@
       "remaining_html": "{{ balance }} restant",
       "add_to_apple_wallet": "Ajouter à Apple Wallet"
     }
+  },
+  "date_formats": {
+    "month_day_year": "%d %B, %Y"
   },
   "sections": {
     "map": {

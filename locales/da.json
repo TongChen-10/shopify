@@ -3,12 +3,10 @@
     "accessibility": {
       "skip_to_content": "Gå til indhold",
       "close_modal": "Luk (esc)",
-      "refresh_page": "Hele siden bliver genindlæst, når du vælger et afsnit.",
-      "selection_help": "Foretag et valg ved at trykke på mellemrumstasten og derefter på piletasterne.",
-      "unit_price_separator": "pr."
+      "refresh_page": "når du vælger en samling bliver hele siden genindlæst"
     },
     "meta": {
-      "tags": "Tagget med \"{{ tags }}\"",
+      "tags": "Mærket \"{{ tags }}\"",
       "page": "Side {{ page }}"
     },
     "404": {
@@ -47,7 +45,7 @@
       "submit": "Søg",
       "read_more": "Læs mere",
       "results_count_html": {
-        "one": "{{ count }} resultater for <strong>{{ terms }}</strong>",
+        "one": "{{ count }} match for <strong>{{ terms }}</strong>",
         "other": "{{ count }} matches for <strong>{{ terms }}</strong>"
       },
       "products": "Produkter",
@@ -63,7 +61,7 @@
   },
   "blogs": {
     "article": {
-      "tags": "Tags",
+      "tags": "Mærker",
       "view_all": "Læs alle",
       "all_tags": "Alle",
       "read_more": "Læs mere",
@@ -89,12 +87,12 @@
       "title": "Indkøbskurv",
       "remove": "Fjern",
       "note": "Særlige instruktioner til sælger",
-      "taxes_and_shipping_at_checkout": "Skatter og levering beregnes ved betaling",
-      "taxes_and_shipping_policy_at_checkout_html": "Skatter og <a href=\"{{ link }}\">levering</a> beregnes ved betaling",
-      "taxes_included_but_shipping_at_checkout": "Inklusive skat. Levering beregnes ved betaling",
-      "taxes_included_and_shipping_policy_html": "Inklusive skatter. <a href=\"{{ link }}\">Levering</a> beregnes ved betaling.",
+      "taxes_and_shipping_at_checkout": "Moms og levering bliver beregnet ved kassen",
+      "taxes_and_shipping_policy_at_checkout_html": "Moms og <a href=\"{{ link }}\">levering</a> bliver beregnet ved kassen",
+      "taxes_included_but_shipping_at_checkout": "Inklusive moms. Levering bliver beregnet ved kassen",
+      "taxes_included_and_shipping_policy_html": "Inklusive moms. <a href=\"{{ link }}\">Levering</a> bliver beregnet ved kassen.",
       "update": "Opdater indkøbskurv",
-      "checkout": "Gå til betaling",
+      "checkout": "Gå til kassen",
       "empty": "Din indkøbskurv er tom.",
       "cookies_required": "Du skal aktivere cookies for at kunne bruge indkøbskurven",
       "continue_browsing": "Fortsæt med at browse",
@@ -104,8 +102,8 @@
     "label": {
       "product": "Produkt",
       "quantity": "Antal",
-      "decrease_quantity": "Reducer antal varer med én",
-      "increase_quantity": "Øg antal varer med en",
+      "decrease_quantity": "Reducer antal genstande med en",
+      "increase_quantity": "Øg antal genstande med en",
       "total": "I alt"
     }
   },
@@ -113,8 +111,8 @@
     "general": {
       "view_all": "Se alle",
       "all_of_collection": "Alle",
-      "no_matches": "Beklager, der er ingen produkter i denne kollektion",
-      "link_title": "Browse vores {{ title }}-kollektion"
+      "no_matches": "Beklager, der er ingen produkter i denne samling",
+      "link_title": "Browse vores {{ title }}-samling"
     },
     "sorting": {
       "title": "Sortér efter",
@@ -158,7 +156,7 @@
       "address1": "Adresse 1",
       "address2": "Adresse 2",
       "city": "By",
-      "country": "Land/område",
+      "country": "Land",
       "province": "Landsdel",
       "zip": "Postnummer",
       "phone": "Telefon",
@@ -184,7 +182,7 @@
       "order_number": "Ordre",
       "date": "Dato",
       "payment_status": "Betalingsstatus",
-      "fulfillment_status": "Behandlingsstatus",
+      "fulfillment_status": "Forsendelsesstatus",
       "total": "I alt",
       "none": "Du har indnu ikke indgivet nogen ordrer."
     },
@@ -195,17 +193,17 @@
       "cancelled_reason": "Begrundelse: {{ reason }}",
       "billing_address": "Faktureringsadresse",
       "payment_status": "Betalingsstatus",
-      "shipping_address": "Leveringsadresse",
-      "fulfillment_status": "Behandlingsstatus",
+      "shipping_address": "Forsendelsesadresse",
+      "fulfillment_status": "Forsendelsesstatus",
       "discount": "Rabat",
-      "shipping": "Levering",
+      "shipping": "Forsendelse",
       "tax": "Moms",
       "product": "Produkt",
       "sku": "SKU",
       "price": "Pris",
       "quantity": "Antal",
       "total": "I alt",
-      "fulfilled_at": "Behandlet den {{ date }}",
+      "fulfilled_at": "Leveret den {{ date }}",
       "subtotal": "Subtotal",
       "track_shipment": "Følg forsendelse"
     },
@@ -230,22 +228,22 @@
       "last_name": "Efternavn",
       "email": "E-mail",
       "password": "Adgangskode",
-      "submit": "Opret"
+      "submit": "Lav"
     }
   },
   "homepage": {
     "hero": {
       "next_slide": "Næste billede",
       "previous_slide": "Forrige billede",
-      "pause_slideshow": "Sæt diasshow på pause",
-      "play_slideshow": "Afspil diasshow",
-      "navigation_instructions": "Brug venstre/højre pile til at navigere i diasshowet eller swipe til venstre/højre, hvis du bruger en mobilenhed",
+      "pause_slideshow": "Sæt slideshow på pause",
+      "play_slideshow": "Afspil slideshow",
+      "navigation_instructions": "Brug venstre/højre pile til at navigere i diasshowet eller stryg til venstre/højre, hvis du bruger en mobilenhed",
       "slide_number": "Billede nr. {{ slide_number }}, aktuel"
     },
     "onboarding": {
       "blog_title": "Titlen på dit opslag",
       "product_title": "Eksempel på produkttitel",
-      "collection_title": "Titel på kollektion",
+      "collection_title": "Samlings titel",
       "no_content": "Dette område har endnu ikke noget indhold. Tilføj indhold til dette område ved brug af sidebjælken."
     }
   },
@@ -270,14 +268,14 @@
       "sold_out": "Udsolgt",
       "unavailable": "Ikke tilgængelig",
       "will_not_ship_until": "Bliver ikke sendt før d. {{ date }}",
-      "will_be_in_stock_after": "Vil være på lager efter den {{ date }}",
+      "will_be_in_stock_after": "Vil være på lager efter d. {{ date }}",
       "sale_price": "Udsalgspris",
       "regular_price": "Normalpris",
       "on_sale": "Udsalg",
       "on_sale_from_html": "På tilbud fra {{ price }}",
       "from_text_html": "Fra {{ price }}",
       "include_taxes": "Inklusive moms.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Levering</a> beregnes ved betaling.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Levering</a> bliver beregnet ved kassen.",
       "quantity": "Antal",
       "add_to_cart": "Læg i indkøbskurv",
       "full_details": "Udførlige detaljer",
@@ -287,9 +285,8 @@
         "other": "{{ count }} tilgængelige"
       },
       "collection_return": "Tilbage til {{ collection }}",
-      "product_added_to_cart_html": "Vare lagt i indkøbskurv. <span>Se indkøbskurv og gå til betaling</span>.",
-      "stock_unavailable": "Produktet kunne ikke lægges i din indkøbskurv, da der ikke er nok på lager.",
-      "unit_price_label": "Pris pr. stk."
+      "product_added_to_cart_html": "Produkt lagt i indkøbskurv. <span>Se indkøbskurv og gå til kassen</span>.",
+      "stock_unavailable": "Produktet kunne ikke lægges i din indkøbskurv, da der ikke er nok på lager."
     }
   },
   "gift_cards": {
@@ -299,19 +296,22 @@
       "disabled": "Slået fra",
       "expired": "Udløb den {{ expiry }}",
       "active": "Udløber den {{ expiry }}",
-      "redeem": "Brug denne kode ved betaling for at indløse dit gavekort",
+      "redeem": "Brug denne kode ved kassen for at indløse dit gavekort",
       "shop_link": "Begynd at shoppe",
       "print": "Print",
       "remaining_html": "{{ balance }} tilbage",
       "add_to_apple_wallet": "Tilføj til Apple Wallet"
     }
   },
+  "date_formats": {
+    "month_day_year": "%B %d, %Y"
+  },
   "sections": {
     "map": {
       "get_directions": "Få vejledninger",
       "address_error": "Der opstod en fejl under forsøg på at finde adressen",
       "address_no_results": "Ingen resultater for den adresse",
-      "address_query_limit_html": "Du har overskredet Googles API-brugerbegrænsning. Overvej at opgradere til et <a href=\"https://developers.google.com/maps/premium/usage-limits\">Premium-abonnement</a>.",
+      "address_query_limit_html": "Du har overskredet Googles API-brugerbegrænsning. Overvej at opgradere til en <a href=\"https://developers.google.com/maps/premium/usage-limits\">Premium-plan</a>.",
       "auth_error_html": "Der opstod en fejl under bekræftelse af din Google Maps API-nøgle."
     }
   },

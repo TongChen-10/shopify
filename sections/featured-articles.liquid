@@ -41,7 +41,7 @@
                 {% endif %}
                 <div class="article-block__info">
                   <span class="article-block__date">
-                    {{ article.published_at | time_tag: format: 'date' }}
+                    {{ article.published_at | time_tag: format: 'month_day_year' }}
                   </span>
                   <h6 class="article-block__title">{{ article.title }}</h6>
                   <p>{{ 'blogs.article.read_more' | t }}</p>
@@ -88,24 +88,13 @@
 {% schema %}
 {
   "name": {
-    "da": "Blogopslag",
     "de": "Blog-Beiträge",
     "en": "Blog posts",
     "es": "Entradas del blog",
-    "fi": "Blogijulkaisut",
     "fr": "Articles de blog",
-    "hi": "ब्लॉग पोस्ट",
     "it": "Articoli del blog",
     "ja": "ブログ記事",
-    "ko": "블로그 게시물",
-    "nb": "Blogginnlegg",
-    "nl": "Blogberichten",
-    "pt-BR": "Posts do blog",
-    "pt-PT": "Publicações no blogue",
-    "sv": "Blogginlägg",
-    "th": "โพสต์บล็อก",
-    "zh-CN": "博客文章",
-    "zh-TW": "部落格文章"
+    "pt-BR": "Posts do blog"
   },
   "class": "index-section",
   "settings": [
@@ -113,68 +102,35 @@
       "type": "text",
       "id": "title",
       "label": {
-        "da": "Overskrift",
         "de": "Titel",
         "en": "Heading",
         "es": "Título",
-        "fi": "Otsake",
         "fr": "Titre",
-        "hi": "शीर्षक",
         "it": "Heading",
         "ja": "見出し",
-        "ko": "제목",
-        "nb": "Overskrift",
-        "nl": "Kop",
-        "pt-BR": "Título",
-        "pt-PT": "Título",
-        "sv": "Rubrik",
-        "th": "ส่วนหัว",
-        "zh-CN": "标题",
-        "zh-TW": "標題"
+        "pt-BR": "Título"
       },
       "default": {
-        "da": "Blog",
         "de": "Blog",
         "en": "Blog",
         "es": "Blog",
-        "fi": "Blogi",
         "fr": "Blog",
-        "hi": "ब्लॉग",
         "it": "Blog",
         "ja": "ブログ",
-        "ko": "블로그",
-        "nb": "Blogg",
-        "nl": "Blog",
-        "pt-BR": "Blog",
-        "pt-PT": "Blogue",
-        "sv": "Blogg",
-        "th": "บล็อก",
-        "zh-CN": "博客",
-        "zh-TW": "部落格"
+        "pt-BR": "Blog"
       }
     },
     {
       "type": "checkbox",
       "id": "show_view_all",
       "label": {
-        "da": "Vis linket \"Læs alle\"",
         "de": "Schaltfläche \"Alle lesen\" anzeigen",
         "en": "Show 'Read all' link",
         "es": "Mostrar el enlace \"Leer todo\"",
-        "fi": "Näytä \"Lue kaikki\" -linkki",
         "fr": "Afficher le lien « Tout lire »",
-        "hi": "'सभी पढ़ें' लिंक दिखाएं",
         "it": "Mostra link \"Leggi tutto\"",
         "ja": "「すべて読む」リンクを表示する",
-        "ko": "'모두 읽기' 링크 표시",
-        "nb": "Vis «Les alle»-koblingen",
-        "nl": "Laat link 'Alles lezen' zien",
-        "pt-BR": "Exibir o link \"Ler tudo\"",
-        "pt-PT": "Mostrar ligação \"Ler tudo\"",
-        "sv": "Visa länken \"Läs allt\"",
-        "th": "แสดงลิงก์ 'อ่านทั้งหมด'",
-        "zh-CN": "显示“阅读全部”链接",
-        "zh-TW": "顯示「閱讀全部」連結"
+        "pt-BR": "Exibir o link \"Ler tudo\""
       },
       "default": true
     },
@@ -182,48 +138,26 @@
       "type": "blog",
       "id": "blog",
       "label": {
-        "da": "Blog",
         "de": "Blog",
         "en": "Blog",
         "es": "Blog",
-        "fi": "Blogi",
         "fr": "Blog",
-        "hi": "ब्लॉग",
         "it": "Blog",
         "ja": "ブログ",
-        "ko": "블로그",
-        "nb": "Blogg",
-        "nl": "Blog",
-        "pt-BR": "Blog",
-        "pt-PT": "Blogue",
-        "sv": "Blogg",
-        "th": "บล็อก",
-        "zh-CN": "博客",
-        "zh-TW": "部落格"
+        "pt-BR": "Blog"
       }
     },
     {
       "type": "range",
       "id": "post_limit",
       "label": {
-        "da": "Opslag",
         "de": "Beiträge",
         "en": "Posts",
         "es": "Publicaciones",
-        "fi": "Julkaisut",
         "fr": "Articles",
-        "hi": "पोस्ट",
         "it": "articoli",
         "ja": "投稿",
-        "ko": "게시물",
-        "nb": "Innlegg",
-        "nl": "Berichten",
-        "pt-BR": "posts",
-        "pt-PT": "Publicações",
-        "sv": "Inlägg",
-        "th": "โพสต์",
-        "zh-CN": "文章",
-        "zh-TW": "貼文"
+        "pt-BR": "posts"
       },
       "min": 1,
       "max": 3,
@@ -234,44 +168,22 @@
   "presets": [
     {
       "name": {
-        "da": "Blogopslag",
         "de": "Blog-Beiträge",
         "en": "Blog posts",
         "es": "Entradas del blog",
-        "fi": "Blogijulkaisut",
         "fr": "Articles de blog",
-        "hi": "ब्लॉग पोस्ट",
         "it": "Articoli del blog",
         "ja": "ブログ記事",
-        "ko": "블로그 게시물",
-        "nb": "Blogginnlegg",
-        "nl": "Blogberichten",
-        "pt-BR": "Posts do blog",
-        "pt-PT": "Publicações no blogue",
-        "sv": "Blogginlägg",
-        "th": "โพสต์บล็อก",
-        "zh-CN": "博客文章",
-        "zh-TW": "部落格文章"
+        "pt-BR": "Posts do blog"
       },
       "category": {
-        "da": "Blog",
         "de": "Blog",
         "en": "Blog",
         "es": "Blog",
-        "fi": "Blogi",
         "fr": "Blog",
-        "hi": "ब्लॉग",
         "it": "Blog",
         "ja": "ブログ",
-        "ko": "블로그",
-        "nb": "Blogg",
-        "nl": "Blog",
-        "pt-BR": "Blog",
-        "pt-PT": "Blogue",
-        "sv": "Blogg",
-        "th": "บล็อก",
-        "zh-CN": "博客",
-        "zh-TW": "部落格"
+        "pt-BR": "Blog"
       },
       "settings": {
         "blog": "News"

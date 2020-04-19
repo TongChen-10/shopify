@@ -6,14 +6,12 @@
   it is from search results.
 {% endcomment %}
 
-{%- assign current_variant = product.selected_or_first_available_variant -%}
-
 <a href="{{ product.url | within: collection }}" class="product-card">
   {% comment %} <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ product.featured_image.alt | escape }}" class="product-card__image"> {% endcomment %}
   {% assign image = product.featured_image %}
   <div class="product-card__image-container">
     <div class="product-card__image-wrapper">
-      <div class="product-card__image js" style="max-width: {% include 'image-width' with image: image, width: 235 %}px;" data-image-id="{{ image.id }}" data-image-with-placeholder-wrapper>
+      <div class="product-card__image js" style="max-width: {% include 'image-width' with image: image, width: 235 %}px;" data-image-id="{{ image.id }}">
         <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100 }}%;">
           {% assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
           <img class="lazyload"
@@ -22,10 +20,8 @@
             data-aspectratio="{{ image.aspect_ratio }}"
             data-sizes="auto"
             data-parent-fit="contain"
-            data-image
             alt="{{ image.alt | escape }}">
         </div>
-        <div class="placeholder-background placeholder-background--animation" data-image-placeholder></div>
       </div>
       <noscript>
         <img src="{{ product.featured_image.src | img_url: '480x480' }}" alt="{{ product.featured_image.alt | escape }}" class="product-card__image">
@@ -69,17 +65,13 @@
           {% endif %}
 
         {% endif %}
-        {%- unless product.price_varies -%}
-          {%- if current_variant.unit_price_measurement -%}
-            {% include 'product-unit-price', product_variant: current_variant, wrapper_class: "product-card__unit-price" %}
-          {%- endif -%}
-        {%- endunless -%}
       </div>
     {% else %}
       <div class="product-card__availability">
         {{ 'products.product.sold_out' | t }}
       </div>
     {% endif %}
+    
   </div>
 
   {% if product.compare_at_price > product.price %}
