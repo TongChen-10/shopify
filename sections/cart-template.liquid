@@ -3,7 +3,7 @@
     {% if cart.item_count > 0 %}
 
       <h1 class="small--text-center">{{ 'cart.general.title' | t }}</h1>
-      <form action="/cart" method="post" novalidate class="cart">
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="cart">
         <table class="responsive-table cart-table">
           <thead class="cart__row visually-hidden">
             <th colspan="2">{{ 'cart.label.product' | t }}</th>
@@ -12,7 +12,6 @@
           </thead>
           <tbody id="CartProducts">
             {% for item in cart.items %}
-{% include 'smartifyapps.smart-offer', recalculate_for: 'cart_item_price', cart_item: item %}
               <tr class="cart__row responsive-table__row">
                 <td class="cart__cell--image text-center">
                   <a href="{{ item.url | within: collections.all }}" class="cart__image">
@@ -44,7 +43,7 @@
                   {% endif %}
 
                   <p>
-                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">{{ 'cart.general.remove' | t }}</a>
+                    <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0">{{ 'cart.general.remove' | t }}</a>
                   </p>
                 </td>
                 <td class="cart__cell--quantity">
@@ -52,15 +51,27 @@
                   <input type="number" name="updates[]" id="Updates_{{ item.key }}" class="cart__quantity" value="{{ item.quantity }}" min="0" data-line="{{ forloop.index }}" aria-label="{{ 'cart.label.quantity' | t }}">
                 </td>
                 <td class="cart__cell--total">
-                  {% if item.original_line_price !=  smartifyapps_line_price  %}
-                    <small class="cart-item__original-price cart__item-total"><s>{{ item.original_line_price | money }}</s></small><br>
-                  {% endif %}
-                  <span class="cart__item-total">
-                    <span name='smartifyapps_line_price' item_key='{{item.key}}'>{{  smartifyapps_line_price | default: item.line_price  | money }}</span>
-                  </span>
-                  {% for discount in item.discounts %}
-                    <p class="cart-item__discount cart__item-total">{{ discount.title }}</p>
-                  {% endfor %}
+                  {%- if item.original_line_price != item.final_line_price -%}
+                    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                    <del class="cart__item-total">{{ item.original_line_price | money }}</del>
+                    <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+                    <span class="cart__item-total">{{ item.final_line_price | money }}</span>
+                  {%- else -%}
+                    <span class="cart__item-total">{{ item.original_line_price | money }}</span>
+                  {%- endif -%}
+                  {%- if item.unit_price_measurement -%}
+                    {% include 'product-unit-price', product_variant: item %}
+                  {%- endif -%}
+
+                  {%- if item.line_level_discount_allocations != blank -%}
+                    <ul class="order-discount order-discount--cart order-discount--list order-discount--title" aria-label="{{ 'customer.order.discount' | t }}">
+                      {%- for discount_allocation in item.line_level_discount_allocations -%}
+                        <li class="order-discount__item">
+                          {%- include 'icon-saletag' -%}{{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
                 </td>
               </tr>
             {% endfor %}
@@ -74,13 +85,21 @@
             </div>
           {% endif %}
           <div class="grid__item cart__buttons text-right small--text-center{% if section.settings.cart_notes_enable %} medium-up--one-half{% endif %}">
-            <p class="h3 cart__subtotal" id="CartSubtotal"><span name='smartifyapps_cart_total_price'>{%if smartifyapps_cart_discount >0 %}<del>{{ smartifyapps_cart_total_price|plus: smartifyapps_cart_discount| money }}</del><br>{%endif%}{{  smartifyapps_cart_total_price | default: cart.total_price  | money }}</span></p>
-            <p id="cartDiscountTotal">
-            {% if  smartifyapps_cart_total_discount  > 0 %}
-              {% assign savings =  smartifyapps_cart_total_discount  | money %}
-              {{ 'cart.general.savings_html' | t: price: savings }}
-            {% endif %}
-            </p>
+
+            <div id="CartFooter">
+              {%- if cart.cart_level_discount_applications != blank -%}
+                <div id="cartDiscountTotal" class="order-discount-cart-wrapper">
+                  {%- for discount_application in cart.cart_level_discount_applications -%}
+                    <span class="order-discount order-discount--title order-discount--cart">
+                      {%- include 'icon-saletag' -%}<span class="visually-hidden">{{ 'customer.order.discount' | t }}:</span><span data-cart-discount-title>{{- discount_application.title -}}</span>
+                    </span>
+                    <span class="order-discount order-discount--cart"><strong>-<span data-cart-discount-amount>{{ discount_application.total_allocated_amount | money }}</span></strong></span>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+
+              <p class="h3 cart__subtotal" id="CartSubtotal">{{ cart.total_price | money }}</p>
+            </div>
 
             {%- capture taxes_shipping_checkout -%}
               {%- if shop.taxes_included and shop.shipping_policy.body != blank -%}
@@ -106,7 +125,7 @@
         <p class="cart--empty-message">{{ 'cart.general.empty' | t }}</p>
         <hr>
         <p class="cart--continue-message">
-          <a href="/collections/all" class="btn">{{ 'cart.general.continue_browsing' | t }}</a>
+          <a href="{{ routes.all_products_collection_url }}" class="btn">{{ 'cart.general.continue_browsing' | t }}</a>
         </p>
         <p class="cart--cookie-message">{{ 'cart.general.cookies_required' | t }}</p>
       </div>
@@ -139,7 +158,7 @@
           {{/properties}}
 
           <p>
-            <a href="/cart/change?line={{ line }}&amp;quantity=0">{% endraw %}{{ 'cart.general.remove' | t }}{% raw %}</a>
+            <a href="{% endraw %}{{ routes.cart_change_url }}{% raw %}?line={{ line }}&amp;quantity=0">{% endraw %}{{ 'cart.general.remove' | t }}{% raw %}</a>
           </p>
         </td>
         <td class="cart__cell--quantity">
@@ -149,19 +168,53 @@
         </td>
         <td class="cart__cell--total">
           {{#if discountsApplied}}
-            <small class="cart-item__original-price cart__item-total"><s>{{{originalLinePrice}}}</s></small><br>
+            <span class="visually-hidden">{% endraw %}{{ 'products.product.regular_price' | t }}{% raw %}</span>
+            <del class="cart__item-total">{{{originalLinePrice}}}</del>
+            <span class="visually-hidden">{% endraw %}{{ 'products.product.sale_price' | t }}{% raw %}</span>
             <span class="cart__item-total">{{{linePrice}}}</span>
           {{else}}
-            <span class="cart__item-total">{{{linePrice}}}</span>
+            <span class="cart__item-total">{{{originalLinePrice}}}</span>
           {{/if}}
           {{#if discountsApplied}}
-          {{#each discounts}}
-            <p class="cart-item__discount cart__item-total">{{ this.title }}</p>
-            {{/each}}
+            <ul class="order-discount order-discount--cart order-discount--list order-discount--title" aria-label="{% endraw %}{{ 'customer.order.discount' | t }}{% raw %}">
+              {{#each discounts}}
+                <li class="order-discount__item">
+                  {% endraw %}{%- include 'icon-saletag' -%}{% raw %}{{ this.discount_application.title }} (-{{{ this.formattedAmount }}})
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
+          {{#if unitPrice}}
+            <span class="visually-hidden">{% endraw %}{{ 'products.product.unit_price_label' | t }}{% raw %}</span>
+            <span class="product-unit-price">
+              {% endraw %}
+                {%- capture unit_price_separator -%}
+                  <span aria-hidden="true">/</span><span class="visually-hidden">&nbsp;{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+                {%- endcapture -%}
+              {% raw %}
+
+              <span>{{{ unitPrice.price }}}</span>{% endraw %}{{- unit_price_separator -}}{% raw %}{{#if unitPrice.addRefererenceValue }}{{{ unitPrice.reference_value }}}{{/if}}{{{ unitPrice.reference_unit }}}
+            </span>
           {{/if}}
         </td>
       </tr>
       {{/items}}
+    {% endraw %}
+  </script>
+
+  <script id="CartFooterTemplate" type="text/template">
+    {% raw %}
+      {{#if cartDiscountsApplied}}
+        <div id="cartDiscountTotal" class="order-discount-cart-wrapper">
+          {{#each cartDiscounts}}
+            <span class="order-discount order-discount--title order-discount--cart">
+              {% endraw %}{%- include 'icon-saletag' -%}<span class="visually-hidden">{{ 'customer.order.discount' | t }}{% raw %}:</span>{{ this.title }}
+            </span>
+            <span class="order-discount order-discount--cart"><strong>-{{{ this.formattedAmount }}}</strong></span>
+          {{/each}}
+        </div>
+      {{/if}}
+      <p class="h3 cart__subtotal" id="CartSubtotal">{{{totalPrice}}}</p>
     {% endraw %}
   </script>
 </div>
@@ -175,26 +228,48 @@
 {% schema %}
 {
   "name": {
-    "de": "Einkaufswagenseiten",
+    "da": "Sider med indkøbskurv",
+    "de": "Warenkorbseiten",
     "en": "Cart pages",
-    "es": "Páginas de carrito",
+    "es": "Páginas de carritos de compras",
+    "fi": "Ostoskorisivut",
     "fr": "Pages de panier",
+    "hi": "कार्ट के पेज",
     "it": "Pagine del carrello",
     "ja": "カートページ",
-    "pt-BR": "Páginas de carrinho"
+    "ko": "카트 페이지",
+    "nb": "Handlekurvsider",
+    "nl": "Winkelwagenpagina's",
+    "pt-BR": "Páginas de carrinho",
+    "pt-PT": "Páginas de carrinho",
+    "sv": "Varukorgssidor",
+    "th": "หน้าตะกร้าสินค้า",
+    "zh-CN": "购物车页面",
+    "zh-TW": "購物車頁面"
   },
   "settings": [
     {
       "type": "checkbox",
       "id": "cart_notes_enable",
       "label": {
+        "da": "Aktivér ordrebemærkninger",
         "de": "Bestellhinweis aktivieren",
         "en": "Enable order notes",
         "es": "Habilitar notas de pedido",
+        "fi": "Ota tilauksen huomautukset käyttöön",
         "fr": "Activer les notes de commande",
+        "hi": "ऑर्डर नोट्स सक्षम करें",
         "it": "Abilita le note sugli ordini",
         "ja": "注文メモを有効にする",
-        "pt-BR": "Habilite observações sobre o pedido"
+        "ko": "주문 참고 사항 사용",
+        "nb": "Aktiver bestillingsmerknader",
+        "nl": "Opmerkingen bij bestellingen inschakelen",
+        "pt-BR": "Habilitar observações de pedido",
+        "pt-PT": "Ativar as notas de encomendas",
+        "sv": "Aktivera orderanteckningar",
+        "th": "เปิดใช้งานหมายเหตุของคำสั่งซื้อ",
+        "zh-CN": "启用订单备注",
+        "zh-TW": "啟用訂單備註"
       },
       "default": true
     }
