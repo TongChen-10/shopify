@@ -3,7 +3,9 @@
     "accessibility": {
       "skip_to_content": "Skip to content",
       "close_modal": "Close (esc)",
-      "refresh_page": "choosing a selection results in a full page refresh"
+      "refresh_page": "Choosing a selection results in a full page refresh.",
+      "selection_help": "Press the space key then arrow keys to make a selection.",
+      "unit_price_separator": "per"
     },
     "meta": {
       "tags": "Tagged \"{{ tags }}\"",
@@ -156,7 +158,7 @@
       "address1": "Address1",
       "address2": "Address2",
       "city": "City",
-      "country": "Country",
+      "country": "Country/Region",
       "province": "Province",
       "zip": "Postal/Zip Code",
       "phone": "Phone",
@@ -286,7 +288,8 @@
       },
       "collection_return": "Back to {{ collection }}",
       "product_added_to_cart_html": "Item added to cart. <span>View cart and check out</span>.",
-      "stock_unavailable": "The item could not be added to your cart because there are not enough in stock."
+      "stock_unavailable": "The item could not be added to your cart because there are not enough in stock.",
+      "unit_price_label": "Unit price"
     }
   },
   "gift_cards": {
@@ -302,9 +305,6 @@
       "remaining_html": "{{ balance }} left",
       "add_to_apple_wallet": "Add to Apple Wallet"
     }
-  },
-  "date_formats": {
-    "month_day_year": "%B %d, %Y"
   },
   "sections": {
     "map": {

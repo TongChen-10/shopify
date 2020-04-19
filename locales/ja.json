@@ -3,7 +3,9 @@
     "accessibility": {
       "skip_to_content": "コンテンツにスキップする",
       "close_modal": "閉じる (esc)",
-      "refresh_page": "選択範囲を選択すると、ページ全体がリフレッシュされます"
+      "refresh_page": "選択範囲を選択すると、ページ全体がリフレッシュされます。",
+      "selection_help": "スペースキーを押してから矢印キーを押して選択します。",
+      "unit_price_separator": "あたり"
     },
     "meta": {
       "tags": "タグ \"{{ tags }}\"",
@@ -34,7 +36,7 @@
       }
     },
     "newsletter_form": {
-      "newsletter_label": "登録して、最新ニュースやセール、スタイルなどの情報を受け取りましょう。",
+      "newsletter_label": "サインアップして、最新ニュースやセール、スタイルなどの情報を受け取りましょう。",
       "newsletter_placeholder": "あなたのメールアドレス",
       "submit": "登録する",
       "confirmation": "ご登録ありがとうございます"
@@ -56,7 +58,7 @@
       "navigation": "サイトナビゲーション"
     },
     "payment": {
-      "method": "お支払い方法"
+      "method": "決済方法"
     }
   },
   "blogs": {
@@ -87,12 +89,12 @@
       "title": "あなたのカート",
       "remove": "削除",
       "note": "ストアへの特記事項",
-      "taxes_and_shipping_at_checkout": "税と送料はチェックアウト時に計算されます",
-      "taxes_and_shipping_policy_at_checkout_html": "税と<a href=\"{{ link }}\">配送料</a>はチェックアウト時に計算されます",
-      "taxes_included_but_shipping_at_checkout": "税込みで配送料はチェックアウト時に計算されます。",
-      "taxes_included_and_shipping_policy_html": "税込み。<a href=\"{{ link }}\">配送料</a>はチェックアウト時に計算されます。",
+      "taxes_and_shipping_at_checkout": "税と配送料は購入手続き時に計算されます",
+      "taxes_and_shipping_policy_at_checkout_html": "税と<a href=\"{{ link }}\">配送料</a>は購入手続き時に計算されます",
+      "taxes_included_but_shipping_at_checkout": "税込みで配送料は購入手続き時に計算されます。",
+      "taxes_included_and_shipping_policy_html": "税込価格。<a href=\"{{ link }}\">配送料</a>は購入手続き時に計算されます。",
       "update": "カートをアップデートする",
-      "checkout": "チェックアウト",
+      "checkout": "ご購入手続きへ",
       "empty": "カート内に商品がありません。",
       "cookies_required": "カートを使うためにCookieを有効にする",
       "continue_browsing": "買い物を続ける",
@@ -115,7 +117,7 @@
       "link_title": "{{ title }}のコレクションを見る"
     },
     "sorting": {
-      "title": "分類",
+      "title": "並び替え",
       "title_tags": "絞り込み",
       "all_of_collection": "すべて"
     }
@@ -156,7 +158,7 @@
       "address1": "住所",
       "address2": "住所",
       "city": "市区町村",
-      "country": "国",
+      "country": "国 / 地域",
       "province": "都道府県",
       "zip": "郵便番号",
       "phone": "電話番号",
@@ -190,7 +192,7 @@
       "title": "注文 {{ name }}",
       "date": "注文の日付 {{ date }}",
       "cancelled": "注文がキャンセルされた日付 {{ date }}",
-      "cancelled_reason": "理由: {{ reason }}",
+      "cancelled_reason": "キャンセルの理由: {{ reason }}",
       "billing_address": "請求先住所",
       "payment_status": "お支払いの状況",
       "shipping_address": "配送先住所",
@@ -242,7 +244,7 @@
     },
     "onboarding": {
       "blog_title": "あなたの投稿のタイトル",
-      "product_title": "商品タイトルの例",
+      "product_title": "商品名の例",
       "collection_title": "コレクションのタイトル",
       "no_content": "このセクションには現在コンテンツがありません。サイドバーを使用してこのセクションにコンテンツを追加する。"
     }
@@ -267,15 +269,15 @@
     "product": {
       "sold_out": "売り切れ",
       "unavailable": "お取り扱いできません",
-      "will_not_ship_until": "{{ date }}まで発送できません。",
+      "will_not_ship_until": "{{ date }}まで配送できません。",
       "will_be_in_stock_after": "{{ date }}入荷予定",
-      "sale_price": "セール価格",
+      "sale_price": "販売価格",
       "regular_price": "通常価格",
       "on_sale": "セール",
-      "on_sale_from_html": "{{ price }}から販売中",
+      "on_sale_from_html": "{{ price }}からセール中",
       "from_text_html": "{{ price }}から",
-      "include_taxes": "税込み。",
-      "shipping_policy_html": "<a href=\"{{ link }}\">配送料</a>はチェックアウト時に計算されます。",
+      "include_taxes": "税込",
+      "shipping_policy_html": "<a href=\"{{ link }}\">配送料</a>は購入手続き時に計算されます。",
       "quantity": "個数",
       "add_to_cart": "カートに追加する",
       "full_details": "詳細",
@@ -286,7 +288,8 @@
       },
       "collection_return": "{{ collection }}へ戻る",
       "product_added_to_cart_html": "カートに商品が追加されました。<span>カートを確認してチェックアウトする</span>。",
-      "stock_unavailable": "この商品は在庫数が足りないためカートに追加することができませんでした。"
+      "stock_unavailable": "この商品は在庫数が足りないためカートに追加することができませんでした。",
+      "unit_price_label": "単価"
     }
   },
   "gift_cards": {
@@ -296,15 +299,12 @@
       "disabled": "無効",
       "expired": "{{ expiry }}で有効期限が切れました",
       "active": "{{ expiry }}で有効期限が切れます",
-      "redeem": "ギフトカードを利用するには、このコードをチェックアウト時に使用してください",
+      "redeem": "ギフトカードを引き換えるには、このコードを購入手続き時に使用してください",
       "shop_link": "買い物を始める",
       "print": "このギフトカードを印刷する",
       "remaining_html": "残り{{ balance }}使用可能です",
       "add_to_apple_wallet": "Apple Walletに追加する"
     }
-  },
-  "date_formats": {
-    "month_day_year": "%Y年%b%d日"
   },
   "sections": {
     "map": {

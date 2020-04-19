@@ -3,7 +3,9 @@
     "accessibility": {
       "skip_to_content": "Direkt zum Inhalt",
       "close_modal": "Schließen (Esc)",
-      "refresh_page": "Wenn Sie eine Auswahl auswählen, wird eine vollständige Seite aktualisiert"
+      "refresh_page": "Wenn Sie eine Auswahl auswählen, wird eine vollständige Seite aktualisiert.",
+      "selection_help": "Drücken Sie die Leertaste und dann die Pfeiltasten, um eine Auswahl zu treffen.",
+      "unit_price_separator": "pro"
     },
     "meta": {
       "tags": "Getaggt \"{{ tags }}\"",
@@ -56,7 +58,7 @@
       "navigation": "Seitennavigation"
     },
     "payment": {
-      "method": "Zahlungsarten"
+      "method": "Zahlungsmethoden"
     }
   },
   "blogs": {
@@ -84,17 +86,17 @@
   },
   "cart": {
     "general": {
-      "title": "Einkaufswagen",
+      "title": "Warenkorb",
       "remove": "Entfernen",
       "note": "Besondere Hinweise an den Verkäufer",
       "taxes_and_shipping_at_checkout": "Steuern und Versandkosten werden beim Checkout berechnet",
       "taxes_and_shipping_policy_at_checkout_html": "zzgl. MwSt. und <a href=\"{{ link }}\">Versandkosten</a>",
       "taxes_included_but_shipping_at_checkout": "inkl. MwSt.",
       "taxes_included_and_shipping_policy_html": "inkl. MwSt. zzgl. <a href=\"{{ link }}\">Versandkosten</a>",
-      "update": "Einkaufswagen aktualisieren",
+      "update": "Warenkorb aktualisieren",
       "checkout": "Zur Kasse",
-      "empty": "Ihr Einkaufswagen ist im Moment leer.",
-      "cookies_required": "Aktivieren Sie Cookies, um den Einkaufswagen benutzen zu können",
+      "empty": "Ihr Warenkorb ist im Moment leer.",
+      "cookies_required": "Aktivieren Sie Cookies, um den Warenkorb benutzen zu können",
       "continue_browsing": "Mit der Suche hier fortfahren.",
       "close_notification": "Schließen",
       "savings_html": "Sie sparen {{ price }}"
@@ -112,7 +114,7 @@
       "view_all": "Alle anzeigen",
       "all_of_collection": "Alle",
       "no_matches": "Es tut uns leid, aber Ihre Suche nach Produkten hat keine Treffer ergeben.",
-      "link_title": "Durchsuchen Sie unsere {{ title }}-Zusammenstellung"
+      "link_title": "Durchsuchen Sie unsere {{ title }}-Kategorie"
     },
     "sorting": {
       "title": "Sortieren nach",
@@ -132,17 +134,17 @@
   },
   "customer": {
     "account": {
-      "title": "Mein Account",
-      "details": "Account-Details",
+      "title": "Mein Konto",
+      "details": "Kontodetails",
       "view_addresses": "Adressen ansehen",
-      "return": "Zurück zu Account-Details"
+      "return": "Zurück zu Kontodetails"
     },
     "activate_account": {
-      "title": "Account aktivieren",
-      "subtext": "Erstellen Sie ein Passwort, um Ihren Account zu aktiveren.",
+      "title": "Konto aktivieren",
+      "subtext": "Erstellen Sie ein Passwort, um Ihr Konto zu aktiveren.",
       "password": "Passwort",
       "password_confirm": "Passwort bestätigen",
-      "submit": "Account aktivieren",
+      "submit": "Konto aktivieren",
       "cancel": "Einladung ablehnen"
     },
     "addresses": {
@@ -153,10 +155,10 @@
       "first_name": "Vorname",
       "last_name": "Nachname",
       "company": "Firma",
-      "address1": "Adresse1",
+      "address1": "Adresse 1",
       "address2": "Adresse2",
       "city": "Stadt",
-      "country": "Land",
+      "country": "Land / Region",
       "province": "Bundesland",
       "zip": "PLZ",
       "phone": "Telefon",
@@ -178,7 +180,7 @@
       "guest_continue": "Fortsetzen"
     },
     "orders": {
-      "title": "Bestellungen",
+      "title": "Bestellhistorie",
       "order_number": "Bestellung",
       "date": "Datum",
       "payment_status": "Zahlungsstatus",
@@ -216,14 +218,14 @@
       "success": "Wir haben Ihnen eine E-Mail mit einem Link zum Aktualisieren des Passworts geschickt."
     },
     "reset_password": {
-      "title": "Account-Passwort zurücksetzen",
+      "title": "Passwort für Konto zurücksetzen",
       "subtext": "Geben Sie ein neues Passwort für {{ email }} ein",
       "password": "Passwort",
       "password_confirm": "Passwort bestätigen",
       "submit": "Passwort zurücksetzen"
     },
     "register": {
-      "title": "Account erstellen",
+      "title": "Konto erstellen",
       "first_name": "Vorname",
       "last_name": "Nachname",
       "email": "E-Mail",
@@ -249,12 +251,12 @@
   },
   "layout": {
     "cart": {
-      "title": "Einkaufswagen"
+      "title": "Warenkorb"
     },
     "customer": {
-      "account": "Account",
+      "account": "Konto",
       "log_out": "Ausloggen",
-      "create_account": "Account erstellen"
+      "create_account": "Konto erstellen"
     },
     "sidebar": {
       "featured_products": "Ausgewählte Artikel"
@@ -273,11 +275,11 @@
       "regular_price": "Normaler Preis",
       "on_sale": "Im Angebot",
       "on_sale_from_html": "Im Angebot ab {{ price }}",
-      "from_text_html": "Von {{ price }}",
+      "from_text_html": "Ab {{ price }}",
       "include_taxes": "inkl. MwSt.",
       "shipping_policy_html": "zzgl. <a href=\"{{ link }}\">Versandkosten</a>",
       "quantity": "Menge",
-      "add_to_cart": "In den Einkaufswagen legen",
+      "add_to_cart": "In den Warenkorb legen",
       "full_details": "Alle Einzelheiten",
       "view": "Ansicht",
       "stock_available": {
@@ -285,8 +287,9 @@
         "other": "{{ count }} übrig"
       },
       "collection_return": "Zurück zur {{ collection }}",
-      "product_added_to_cart_html": "Artikel wurde in den Einkaufswagen gelegt. <span>Sehen Sie sich Ihren Einkaufswagen an und gehen Sie zur Kasse</span>.",
-      "stock_unavailable": "Der Artikel konnte nicht in Ihren Warenkorb gelegt werden, da nicht genug Einheiten auf Lager sind."
+      "product_added_to_cart_html": "Artikel wurde in den Warenkorb gelegt. <span>Sehen Sie sich Ihren Warenkorb an und gehen Sie zur Kasse</span>.",
+      "stock_unavailable": "Der Artikel konnte nicht in Ihren Warenkorb gelegt werden, da nicht genug Einheiten auf Lager sind.",
+      "unit_price_label": "Einzelpreis"
     }
   },
   "gift_cards": {
@@ -303,15 +306,12 @@
       "add_to_apple_wallet": "Hinzufügen zu Apple Wallet"
     }
   },
-  "date_formats": {
-    "month_day_year": "%B %d, %Y"
-  },
   "sections": {
     "map": {
       "get_directions": "Richtungen",
       "address_error": "Kann die Adresse nicht finden",
       "address_no_results": "Keine Ergebnisse für diese Adresse",
-      "address_query_limit_html": "Sie haben die Google- API-Nutzungsgrenze überschritten. Betrachten wir zu einem <a href=\"https://developers.google.com/maps/premium/usage-limits\">Premium-Paket</a> zu aktualisieren.",
+      "address_query_limit_html": "Sie haben die Nutzungsgrenze der Google-API überschritten. Sie sollten über ein Upgrade auf einen <a href=\"https://developers.google.com/maps/premium/usage-limits\">Premium-Plan</a> nachdenken.",
       "auth_error_html": "Es gab ein Problem bei Google Maps API Konto zu authentifizieren."
     }
   },
