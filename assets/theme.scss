@@ -228,29 +228,29 @@ $grid-breakpoint-has-push: ($medium-up);
 /*================ Color Variables ================*/
 
 // Button colors
-$color-btn-primary: #eb6d6d;
+$color-btn-primary: #006eff;
 $color-btn-primary-hover: adaptive-color($color-btn-primary, 10%);
 $color-btn-primary-active: adaptive-color($color-btn-primary-hover, 10%);
-$color-btn-primary-text: #ffffff;
+$color-btn-primary-text: #fff;
 
 $color-btn-secondary: #030303;
 $color-btn-secondary-hover: adaptive-color($color-btn-secondary, 5%);
 $color-btn-secondary-active: adaptive-color($color-btn-secondary-hover, 10%);
 $color-btn-secondary-text: color-control($color-btn-secondary);
 
-$color-btn-secondary-accent: #eb6d6d;
+$color-btn-secondary-accent: #006eff;
 $color-btn-secondary-accent-hover: adaptive-color($color-btn-secondary-accent, 10%);
 $color-btn-secondary-accent-active: adaptive-color($color-btn-secondary-accent-hover, 10%);
 
 // Accent color (nav and links)
-$color-accent: #eb6d6d;
-$color-accent-hover: darken(#eb6d6d, 15%);
-$color-accent-text: #ffffff;
+$color-accent: #006eff;
+$color-accent-hover: darken(#006eff, 15%);
+$color-accent-text: #fff;
 
 // General colors
 $color-body-text: #666;
 $color-body: #f7f7f7;
-$color-content: #f7f7f7;
+$color-content: #fff;
 $color-border: $color-body;
 $color-border-body-darken: darken($color-body, 10%);
 $color-heading: #030303;
@@ -266,13 +266,13 @@ $color-footer-text-rgba: rgba(#fff, 0.6);
 $color-footer-border: adaptive-color($color-footer, 5%);
 
 // Emphasized title blocks (like hero slider)
-$color-emphasized-title-bg: rgba(0,0,0,0);
+$color-emphasized-title-bg: #006eff;
 $color-emphasized-title-text: #fff;
 $color-emphasized-subtitle-bg: $color-header;
 $color-emphasized-subtitle-text: $color-header-links;
 
 // Hero
-$color-hero-title-bg: rgba(0,0,0,0);
+$color-hero-title-bg: #006eff;
 $color-hero-title-text: #fff;
 $color-hero-subtitle-bg: $color-header;
 $color-hero-subtitle-text: $color-header-links;
@@ -405,7 +405,7 @@ $font-style-body: normal;
 $font-weight-body: 400;
 $font-weight-body-bold: 700;
 
-$font-size-base: 15px; // Henceforth known as 1em
+$font-size-base: 16px; // Henceforth known as 1em
 $font-size-nav: em(14px);
 $font-size-button: em(14px - 1);
 
@@ -545,7 +545,7 @@ $hero-image-transition: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
       -o-#{$property}: $value;
     } @else if $prefix == spec {
       #{$property}: $value;
-    } @else  {
+    } @else {
       @warn "Unrecognized prefix: #{$prefix}";
     }
   }
@@ -585,7 +585,7 @@ $hero-image-transition: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 }
 
 /*================ Responsive Show/Hide Helper ================*/
-@mixin responsive-display-helper($grid-breakpoint-type:"") {
+@mixin responsive-display-helper($grid-breakpoint-type: '') {
   .#{$grid-breakpoint-type}show {
     display: block !important;
   }
@@ -596,7 +596,7 @@ $hero-image-transition: opacity 0.8s cubic-bezier(0.44, 0.13, 0.48, 0.87);
 }
 
 /*================ Responsive Text Alignment Helper ================*/
-@mixin responsive-text-align-helper($grid-breakpoint-type:"") {
+@mixin responsive-text-align-helper($grid-breakpoint-type: '') {
   .#{$grid-breakpoint-type}text-left {
     text-align: left !important;
   }
@@ -652,7 +652,7 @@ $grid-breakpoints: (
   @include flex-basis(auto!important);
 }
 
-.grid__item[class*="--push"] {
+.grid__item[class*='--push'] {
   position: relative;
 }
 
@@ -664,7 +664,7 @@ $grid-breakpoints: (
 .flex__item {
   position: relative;
   @include flex(1 1 100%);
-  width: auto!important;
+  width: auto !important;
   min-width: 0; // Firefox fix
 }
 
@@ -676,148 +676,363 @@ $grid-breakpoints: (
   Grid Columns
     - Create width classes, prepended by the breakpoint name.
 ==============================================================================*/
-@mixin grid-column-generator($grid-breakpoint-type:"") {
+@mixin grid-column-generator($grid-breakpoint-type: '') {
   /** Whole */
-  .#{$grid-breakpoint-type}one-whole       { width: 100%; @include flex-basis(100%); }
+  .#{$grid-breakpoint-type}one-whole {
+    width: 100%;
+    @include flex-basis(100%);
+  }
 
   /* Halves */
-  .#{$grid-breakpoint-type}one-half        { width: percentage(1/2); @include flex-basis(percentage(1/2)); }
+  .#{$grid-breakpoint-type}one-half {
+    width: percentage(1/2);
+    @include flex-basis(percentage(1/2));
+  }
 
   /* Thirds */
-  .#{$grid-breakpoint-type}one-third       { width: percentage(1/3); @include flex-basis(percentage(1/3)); }
-  .#{$grid-breakpoint-type}two-thirds      { width: percentage(2/3); @include flex-basis(percentage(2/3)); }
+  .#{$grid-breakpoint-type}one-third {
+    width: percentage(1/3);
+    @include flex-basis(percentage(1/3));
+  }
+  .#{$grid-breakpoint-type}two-thirds {
+    width: percentage(2/3);
+    @include flex-basis(percentage(2/3));
+  }
 
   /* Quarters */
-  .#{$grid-breakpoint-type}one-quarter     { width: percentage(1/4); @include flex-basis(percentage(1/4)); }
-  .#{$grid-breakpoint-type}two-quarters    { width: percentage(2/4); @include flex-basis(percentage(2/4)); }
-  .#{$grid-breakpoint-type}three-quarters  { width: percentage(3/4); @include flex-basis(percentage(3/4)); }
+  .#{$grid-breakpoint-type}one-quarter {
+    width: percentage(1/4);
+    @include flex-basis(percentage(1/4));
+  }
+  .#{$grid-breakpoint-type}two-quarters {
+    width: percentage(2/4);
+    @include flex-basis(percentage(2/4));
+  }
+  .#{$grid-breakpoint-type}three-quarters {
+    width: percentage(3/4);
+    @include flex-basis(percentage(3/4));
+  }
 
   /* Fifths */
-  .#{$grid-breakpoint-type}one-fifth       { width: percentage(1/5); @include flex-basis(percentage(1/5)); }
-  .#{$grid-breakpoint-type}two-fifths      { width: percentage(2/5); @include flex-basis(percentage(2/5)); }
-  .#{$grid-breakpoint-type}three-fifths    { width: percentage(3/5); @include flex-basis(percentage(3/5)); }
-  .#{$grid-breakpoint-type}four-fifths     { width: percentage(4/5); @include flex-basis(percentage(4/5)); }
+  .#{$grid-breakpoint-type}one-fifth {
+    width: percentage(1/5);
+    @include flex-basis(percentage(1/5));
+  }
+  .#{$grid-breakpoint-type}two-fifths {
+    width: percentage(2/5);
+    @include flex-basis(percentage(2/5));
+  }
+  .#{$grid-breakpoint-type}three-fifths {
+    width: percentage(3/5);
+    @include flex-basis(percentage(3/5));
+  }
+  .#{$grid-breakpoint-type}four-fifths {
+    width: percentage(4/5);
+    @include flex-basis(percentage(4/5));
+  }
 
   /* Sixths */
-  .#{$grid-breakpoint-type}one-sixth       { width: percentage(1/6); @include flex-basis(percentage(1/6)); }
-  .#{$grid-breakpoint-type}two-sixths      { width: percentage(2/6); @include flex-basis(percentage(2/6)); }
-  .#{$grid-breakpoint-type}three-sixths    { width: percentage(3/6); @include flex-basis(percentage(3/6)); }
-  .#{$grid-breakpoint-type}four-sixths     { width: percentage(4/6); @include flex-basis(percentage(4/6)); }
-  .#{$grid-breakpoint-type}five-sixths     { width: percentage(5/6); @include flex-basis(percentage(5/6)); }
+  .#{$grid-breakpoint-type}one-sixth {
+    width: percentage(1/6);
+    @include flex-basis(percentage(1/6));
+  }
+  .#{$grid-breakpoint-type}two-sixths {
+    width: percentage(2/6);
+    @include flex-basis(percentage(2/6));
+  }
+  .#{$grid-breakpoint-type}three-sixths {
+    width: percentage(3/6);
+    @include flex-basis(percentage(3/6));
+  }
+  .#{$grid-breakpoint-type}four-sixths {
+    width: percentage(4/6);
+    @include flex-basis(percentage(4/6));
+  }
+  .#{$grid-breakpoint-type}five-sixths {
+    width: percentage(5/6);
+    @include flex-basis(percentage(5/6));
+  }
 
   /* Eighths */
-  .#{$grid-breakpoint-type}one-eighth      { width: percentage(1/8); @include flex-basis(percentage(1/8)); }
-  .#{$grid-breakpoint-type}two-eighths     { width: percentage(2/8); @include flex-basis(percentage(2/8)); }
-  .#{$grid-breakpoint-type}three-eighths   { width: percentage(3/8); @include flex-basis(percentage(3/8)); }
-  .#{$grid-breakpoint-type}four-eighths    { width: percentage(4/8); @include flex-basis(percentage(4/8)); }
-  .#{$grid-breakpoint-type}five-eighths    { width: percentage(5/8); @include flex-basis(percentage(5/8)); }
-  .#{$grid-breakpoint-type}six-eighths     { width: percentage(6/8); @include flex-basis(percentage(6/8)); }
-  .#{$grid-breakpoint-type}seven-eighths   { width: percentage(7/8); @include flex-basis(percentage(7/8)); }
+  .#{$grid-breakpoint-type}one-eighth {
+    width: percentage(1/8);
+    @include flex-basis(percentage(1/8));
+  }
+  .#{$grid-breakpoint-type}two-eighths {
+    width: percentage(2/8);
+    @include flex-basis(percentage(2/8));
+  }
+  .#{$grid-breakpoint-type}three-eighths {
+    width: percentage(3/8);
+    @include flex-basis(percentage(3/8));
+  }
+  .#{$grid-breakpoint-type}four-eighths {
+    width: percentage(4/8);
+    @include flex-basis(percentage(4/8));
+  }
+  .#{$grid-breakpoint-type}five-eighths {
+    width: percentage(5/8);
+    @include flex-basis(percentage(5/8));
+  }
+  .#{$grid-breakpoint-type}six-eighths {
+    width: percentage(6/8);
+    @include flex-basis(percentage(6/8));
+  }
+  .#{$grid-breakpoint-type}seven-eighths {
+    width: percentage(7/8);
+    @include flex-basis(percentage(7/8));
+  }
 
   /* Tenths */
-  .#{$grid-breakpoint-type}one-tenth       { width: percentage(1/10); @include flex-basis(percentage(1/10)); }
-  .#{$grid-breakpoint-type}two-tenths      { width: percentage(2/10); @include flex-basis(percentage(2/10)); }
-  .#{$grid-breakpoint-type}three-tenths    { width: percentage(3/10); @include flex-basis(percentage(3/10)); }
-  .#{$grid-breakpoint-type}four-tenths     { width: percentage(4/10); @include flex-basis(percentage(4/10)); }
-  .#{$grid-breakpoint-type}five-tenths     { width: percentage(5/10); @include flex-basis(percentage(5/10)); }
-  .#{$grid-breakpoint-type}six-tenths      { width: percentage(6/10); @include flex-basis(percentage(6/10)); }
-  .#{$grid-breakpoint-type}seven-tenths    { width: percentage(7/10); @include flex-basis(percentage(7/10)); }
-  .#{$grid-breakpoint-type}eight-tenths    { width: percentage(8/10); @include flex-basis(percentage(8/10)); }
-  .#{$grid-breakpoint-type}nine-tenths     { width: percentage(9/10); @include flex-basis(percentage(9/10)); }
+  .#{$grid-breakpoint-type}one-tenth {
+    width: percentage(1/10);
+    @include flex-basis(percentage(1/10));
+  }
+  .#{$grid-breakpoint-type}two-tenths {
+    width: percentage(2/10);
+    @include flex-basis(percentage(2/10));
+  }
+  .#{$grid-breakpoint-type}three-tenths {
+    width: percentage(3/10);
+    @include flex-basis(percentage(3/10));
+  }
+  .#{$grid-breakpoint-type}four-tenths {
+    width: percentage(4/10);
+    @include flex-basis(percentage(4/10));
+  }
+  .#{$grid-breakpoint-type}five-tenths {
+    width: percentage(5/10);
+    @include flex-basis(percentage(5/10));
+  }
+  .#{$grid-breakpoint-type}six-tenths {
+    width: percentage(6/10);
+    @include flex-basis(percentage(6/10));
+  }
+  .#{$grid-breakpoint-type}seven-tenths {
+    width: percentage(7/10);
+    @include flex-basis(percentage(7/10));
+  }
+  .#{$grid-breakpoint-type}eight-tenths {
+    width: percentage(8/10);
+    @include flex-basis(percentage(8/10));
+  }
+  .#{$grid-breakpoint-type}nine-tenths {
+    width: percentage(9/10);
+    @include flex-basis(percentage(9/10));
+  }
 
   /* Twelfths */
-  .#{$grid-breakpoint-type}one-twelfth     { width: percentage(1/12); @include flex-basis(percentage(1/12)); }
-  .#{$grid-breakpoint-type}two-twelfths    { width: percentage(2/12); @include flex-basis(percentage(2/12)); }
-  .#{$grid-breakpoint-type}three-twelfths  { width: percentage(3/12); @include flex-basis(percentage(3/12)); }
-  .#{$grid-breakpoint-type}four-twelfths   { width: percentage(4/12); @include flex-basis(percentage(4/12)); }
-  .#{$grid-breakpoint-type}five-twelfths   { width: percentage(5/12); @include flex-basis(percentage(5/12)); }
-  .#{$grid-breakpoint-type}six-twelfths    { width: percentage(6/12); @include flex-basis(percentage(6/12)); }
-  .#{$grid-breakpoint-type}seven-twelfths  { width: percentage(7/12); @include flex-basis(percentage(7/12)); }
-  .#{$grid-breakpoint-type}eight-twelfths  { width: percentage(8/12); @include flex-basis(percentage(8/12)); }
-  .#{$grid-breakpoint-type}nine-twelfths   { width: percentage(9/12); @include flex-basis(percentage(9/12)); }
-  .#{$grid-breakpoint-type}ten-twelfths    { width: percentage(10/12); @include flex-basis(percentage(10/12)); }
-  .#{$grid-breakpoint-type}eleven-twelfths { width: percentage(11/12); @include flex-basis(percentage(11/12)); }
+  .#{$grid-breakpoint-type}one-twelfth {
+    width: percentage(1/12);
+    @include flex-basis(percentage(1/12));
+  }
+  .#{$grid-breakpoint-type}two-twelfths {
+    width: percentage(2/12);
+    @include flex-basis(percentage(2/12));
+  }
+  .#{$grid-breakpoint-type}three-twelfths {
+    width: percentage(3/12);
+    @include flex-basis(percentage(3/12));
+  }
+  .#{$grid-breakpoint-type}four-twelfths {
+    width: percentage(4/12);
+    @include flex-basis(percentage(4/12));
+  }
+  .#{$grid-breakpoint-type}five-twelfths {
+    width: percentage(5/12);
+    @include flex-basis(percentage(5/12));
+  }
+  .#{$grid-breakpoint-type}six-twelfths {
+    width: percentage(6/12);
+    @include flex-basis(percentage(6/12));
+  }
+  .#{$grid-breakpoint-type}seven-twelfths {
+    width: percentage(7/12);
+    @include flex-basis(percentage(7/12));
+  }
+  .#{$grid-breakpoint-type}eight-twelfths {
+    width: percentage(8/12);
+    @include flex-basis(percentage(8/12));
+  }
+  .#{$grid-breakpoint-type}nine-twelfths {
+    width: percentage(9/12);
+    @include flex-basis(percentage(9/12));
+  }
+  .#{$grid-breakpoint-type}ten-twelfths {
+    width: percentage(10/12);
+    @include flex-basis(percentage(10/12));
+  }
+  .#{$grid-breakpoint-type}eleven-twelfths {
+    width: percentage(11/12);
+    @include flex-basis(percentage(11/12));
+  }
 }
 
 /*================ Grid push classes ================*/
-@mixin grid-push-generator($grid-breakpoint-type:"") {
+@mixin grid-push-generator($grid-breakpoint-type: '') {
   /* Halves */
-  .#{$grid-breakpoint-type}push-one-half        { left: percentage(1/2); }
+  .#{$grid-breakpoint-type}push-one-half {
+    left: percentage(1/2);
+  }
 
   /* Thirds */
-  .#{$grid-breakpoint-type}push-one-third       { left: percentage(1/3); }
-  .#{$grid-breakpoint-type}push-two-thirds      { left: percentage(2/3); }
+  .#{$grid-breakpoint-type}push-one-third {
+    left: percentage(1/3);
+  }
+  .#{$grid-breakpoint-type}push-two-thirds {
+    left: percentage(2/3);
+  }
 
   /* Quarters */
-  .#{$grid-breakpoint-type}push-one-quarter     { left: percentage(1/4); }
-  .#{$grid-breakpoint-type}push-two-quarters    { left: percentage(2/4); }
-  .#{$grid-breakpoint-type}push-three-quarters  { left: percentage(3/4); }
+  .#{$grid-breakpoint-type}push-one-quarter {
+    left: percentage(1/4);
+  }
+  .#{$grid-breakpoint-type}push-two-quarters {
+    left: percentage(2/4);
+  }
+  .#{$grid-breakpoint-type}push-three-quarters {
+    left: percentage(3/4);
+  }
 
   /* Fifths */
-  .#{$grid-breakpoint-type}push-one-fifth       { left: percentage(1/5); }
-  .#{$grid-breakpoint-type}push-two-fifths      { left: percentage(2/5); }
-  .#{$grid-breakpoint-type}push-three-fifths    { left: percentage(3/5); }
-  .#{$grid-breakpoint-type}push-four-fifths     { left: percentage(4/5); }
+  .#{$grid-breakpoint-type}push-one-fifth {
+    left: percentage(1/5);
+  }
+  .#{$grid-breakpoint-type}push-two-fifths {
+    left: percentage(2/5);
+  }
+  .#{$grid-breakpoint-type}push-three-fifths {
+    left: percentage(3/5);
+  }
+  .#{$grid-breakpoint-type}push-four-fifths {
+    left: percentage(4/5);
+  }
 
   /* Sixths */
-  .#{$grid-breakpoint-type}push-one-sixth       { left: percentage(1/6); }
-  .#{$grid-breakpoint-type}push-two-sixths      { left: percentage(2/6); }
-  .#{$grid-breakpoint-type}push-three-sixths    { left: percentage(3/6); }
-  .#{$grid-breakpoint-type}push-four-sixths     { left: percentage(4/6); }
-  .#{$grid-breakpoint-type}push-five-sixths     { left: percentage(5/6); }
+  .#{$grid-breakpoint-type}push-one-sixth {
+    left: percentage(1/6);
+  }
+  .#{$grid-breakpoint-type}push-two-sixths {
+    left: percentage(2/6);
+  }
+  .#{$grid-breakpoint-type}push-three-sixths {
+    left: percentage(3/6);
+  }
+  .#{$grid-breakpoint-type}push-four-sixths {
+    left: percentage(4/6);
+  }
+  .#{$grid-breakpoint-type}push-five-sixths {
+    left: percentage(5/6);
+  }
 
   /* Eighths */
-  .#{$grid-breakpoint-type}push-one-eighth      { left: percentage(1/8); }
-  .#{$grid-breakpoint-type}push-two-eighths     { left: percentage(2/8); }
-  .#{$grid-breakpoint-type}push-three-eighths   { left: percentage(3/8); }
-  .#{$grid-breakpoint-type}push-four-eighths    { left: percentage(4/8); }
-  .#{$grid-breakpoint-type}push-five-eighths    { left: percentage(5/8); }
-  .#{$grid-breakpoint-type}push-six-eighths     { left: percentage(6/8); }
-  .#{$grid-breakpoint-type}push-seven-eighths   { left: percentage(7/8); }
+  .#{$grid-breakpoint-type}push-one-eighth {
+    left: percentage(1/8);
+  }
+  .#{$grid-breakpoint-type}push-two-eighths {
+    left: percentage(2/8);
+  }
+  .#{$grid-breakpoint-type}push-three-eighths {
+    left: percentage(3/8);
+  }
+  .#{$grid-breakpoint-type}push-four-eighths {
+    left: percentage(4/8);
+  }
+  .#{$grid-breakpoint-type}push-five-eighths {
+    left: percentage(5/8);
+  }
+  .#{$grid-breakpoint-type}push-six-eighths {
+    left: percentage(6/8);
+  }
+  .#{$grid-breakpoint-type}push-seven-eighths {
+    left: percentage(7/8);
+  }
 
   /* Tenths */
-  .#{$grid-breakpoint-type}push-one-tenth       { left: percentage(1/10); }
-  .#{$grid-breakpoint-type}push-two-tenths      { left: percentage(2/10); }
-  .#{$grid-breakpoint-type}push-three-tenths    { left: percentage(3/10); }
-  .#{$grid-breakpoint-type}push-four-tenths     { left: percentage(4/10); }
-  .#{$grid-breakpoint-type}push-five-tenths     { left: percentage(5/10); }
-  .#{$grid-breakpoint-type}push-six-tenths      { left: percentage(6/10); }
-  .#{$grid-breakpoint-type}push-seven-tenths    { left: percentage(7/10); }
-  .#{$grid-breakpoint-type}push-eight-tenths    { left: percentage(8/10); }
-  .#{$grid-breakpoint-type}push-nine-tenths     { left: percentage(9/10); }
+  .#{$grid-breakpoint-type}push-one-tenth {
+    left: percentage(1/10);
+  }
+  .#{$grid-breakpoint-type}push-two-tenths {
+    left: percentage(2/10);
+  }
+  .#{$grid-breakpoint-type}push-three-tenths {
+    left: percentage(3/10);
+  }
+  .#{$grid-breakpoint-type}push-four-tenths {
+    left: percentage(4/10);
+  }
+  .#{$grid-breakpoint-type}push-five-tenths {
+    left: percentage(5/10);
+  }
+  .#{$grid-breakpoint-type}push-six-tenths {
+    left: percentage(6/10);
+  }
+  .#{$grid-breakpoint-type}push-seven-tenths {
+    left: percentage(7/10);
+  }
+  .#{$grid-breakpoint-type}push-eight-tenths {
+    left: percentage(8/10);
+  }
+  .#{$grid-breakpoint-type}push-nine-tenths {
+    left: percentage(9/10);
+  }
 
   /* Twelfths */
-  .#{$grid-breakpoint-type}push-one-twelfth     { left: percentage(1/12); }
-  .#{$grid-breakpoint-type}push-two-twelfths    { left: percentage(2/12); }
-  .#{$grid-breakpoint-type}push-three-twelfths  { left: percentage(3/12); }
-  .#{$grid-breakpoint-type}push-four-twelfths   { left: percentage(4/12); }
-  .#{$grid-breakpoint-type}push-five-twelfths   { left: percentage(5/12); }
-  .#{$grid-breakpoint-type}push-six-twelfths    { left: percentage(6/12); }
-  .#{$grid-breakpoint-type}push-seven-twelfths  { left: percentage(7/12); }
-  .#{$grid-breakpoint-type}push-eight-twelfths  { left: percentage(8/12); }
-  .#{$grid-breakpoint-type}push-nine-twelfths   { left: percentage(9/12); }
-  .#{$grid-breakpoint-type}push-ten-twelfths    { left: percentage(10/12); }
-  .#{$grid-breakpoint-type}push-eleven-twelfths { left: percentage(11/12); }
+  .#{$grid-breakpoint-type}push-one-twelfth {
+    left: percentage(1/12);
+  }
+  .#{$grid-breakpoint-type}push-two-twelfths {
+    left: percentage(2/12);
+  }
+  .#{$grid-breakpoint-type}push-three-twelfths {
+    left: percentage(3/12);
+  }
+  .#{$grid-breakpoint-type}push-four-twelfths {
+    left: percentage(4/12);
+  }
+  .#{$grid-breakpoint-type}push-five-twelfths {
+    left: percentage(5/12);
+  }
+  .#{$grid-breakpoint-type}push-six-twelfths {
+    left: percentage(6/12);
+  }
+  .#{$grid-breakpoint-type}push-seven-twelfths {
+    left: percentage(7/12);
+  }
+  .#{$grid-breakpoint-type}push-eight-twelfths {
+    left: percentage(8/12);
+  }
+  .#{$grid-breakpoint-type}push-nine-twelfths {
+    left: percentage(9/12);
+  }
+  .#{$grid-breakpoint-type}push-ten-twelfths {
+    left: percentage(10/12);
+  }
+  .#{$grid-breakpoint-type}push-eleven-twelfths {
+    left: percentage(11/12);
+  }
 }
 
 /*================ Clearfix helper on uniform grids ================*/
-@mixin grid-uniform-clearfix($grid-breakpoint-type:"") {
+@mixin grid-uniform-clearfix($grid-breakpoint-type: '') {
   .grid--uniform {
-    .#{$grid-breakpoint-type}one-half:nth-child(2n+1),
-    .#{$grid-breakpoint-type}one-third:nth-child(3n+1),
-    .#{$grid-breakpoint-type}one-quarter:nth-child(4n+1),
-    .#{$grid-breakpoint-type}one-fifth:nth-child(5n+1),
-    .#{$grid-breakpoint-type}one-sixth:nth-child(6n+1),
-    .#{$grid-breakpoint-type}two-sixths:nth-child(3n+1),
-    .#{$grid-breakpoint-type}three-sixths:nth-child(2n+1),
-    .#{$grid-breakpoint-type}two-eighths:nth-child(4n+1),
-    .#{$grid-breakpoint-type}four-eighths:nth-child(2n+1),
-    .#{$grid-breakpoint-type}five-tenths:nth-child(2n+1),
-    .#{$grid-breakpoint-type}one-twelfth:nth-child(12n+1),
-    .#{$grid-breakpoint-type}two-twelfths:nth-child(6n+1),
-    .#{$grid-breakpoint-type}three-twelfths:nth-child(4n+1),
-    .#{$grid-breakpoint-type}four-twelfths:nth-child(3n+1),
-    .#{$grid-breakpoint-type}six-twelfths:nth-child(2n+1)    { clear: both; }
+    .#{$grid-breakpoint-type}one-half:nth-child(2n + 1),
+    .#{$grid-breakpoint-type}one-third:nth-child(3n + 1),
+    .#{$grid-breakpoint-type}one-quarter:nth-child(4n + 1),
+    .#{$grid-breakpoint-type}one-fifth:nth-child(5n + 1),
+    .#{$grid-breakpoint-type}one-sixth:nth-child(6n + 1),
+    .#{$grid-breakpoint-type}two-sixths:nth-child(3n + 1),
+    .#{$grid-breakpoint-type}three-sixths:nth-child(2n + 1),
+    .#{$grid-breakpoint-type}two-eighths:nth-child(4n + 1),
+    .#{$grid-breakpoint-type}four-eighths:nth-child(2n + 1),
+    .#{$grid-breakpoint-type}five-tenths:nth-child(2n + 1),
+    .#{$grid-breakpoint-type}one-twelfth:nth-child(12n + 1),
+    .#{$grid-breakpoint-type}two-twelfths:nth-child(6n + 1),
+    .#{$grid-breakpoint-type}three-twelfths:nth-child(4n + 1),
+    .#{$grid-breakpoint-type}four-twelfths:nth-child(3n + 1),
+    .#{$grid-breakpoint-type}six-twelfths:nth-child(2n + 1) {
+      clear: both;
+    }
   }
 }
 
@@ -847,7 +1062,9 @@ $grid-breakpoints: (
   #Normalize
   Based on normalize.css v3.0.2 | MIT License | git.io/normalize
 ==============================================================================*/
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
@@ -893,7 +1110,6 @@ em {
   font-style: italic;
 }
 
-
 small {
   font-size: 80%;
 }
@@ -935,21 +1151,21 @@ html input[disabled] {
 }
 
 button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
 button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
@@ -987,7 +1203,8 @@ textarea {
   height: 1px;
   width: 1px;
   margin: -1px;
-  padding: 0; border: 0;
+  padding: 0;
+  border: 0;
 }
 
 .js-focus-hidden:focus {
@@ -1020,17 +1237,16 @@ html {
   @include clearfix();
   max-width: $width-site;
   margin: 0 auto;
-  padding: 0 ($gutter-site / 4);
+  padding: 0 ($gutter-site / 2);
 
   @include media-query($medium-up) {
-    padding: 0 $gutter-site / 2;
+    padding: 0 $gutter-site;
   }
 }
 
 /*================ Typography ================*/
 blockquote {
   p {
-
     & + cite {
       margin-top: $gutter-site / 2;
     }
@@ -1045,8 +1261,9 @@ blockquote {
   }
 }
 
-code, pre {
-  font-family: Consolas,monospace;
+code,
+pre {
+  font-family: Consolas, monospace;
   font-size: 1em;
 }
 
@@ -1124,7 +1341,8 @@ symbol.icon:not(.icon--full-color) {
 }
 
 /*================ #Lists ================*/
-ul, ol {
+ul,
+ol {
   margin: 0;
   padding: 0;
 }
@@ -1144,7 +1362,8 @@ ol {
 }
 
 .rte {
-  ul, ol {
+  ul,
+  ol {
     margin: 0 0 ($gutter-site / 2) $gutter-site;
   }
 
@@ -1158,6 +1377,10 @@ ol {
         list-style: square outside;
       }
     }
+  }
+
+  img {
+    height: auto;
   }
 }
 
@@ -1206,8 +1429,8 @@ ol {
 
   &:active,
   &:focus {
-   background-color: $color-btn-primary-active;
-   color: $color-btn-primary-text;
+    background-color: $color-btn-primary-active;
+    color: $color-btn-primary-text;
   }
 
   &[disabled] {
@@ -1234,8 +1457,8 @@ ol {
 
   &:active,
   &:focus {
-   background-color: $color-btn-secondary-active;
-   color: $color-btn-secondary-text;
+    background-color: $color-btn-secondary-active;
+    color: $color-btn-secondary-text;
   }
 }
 
@@ -1289,7 +1512,8 @@ th {
   font-weight: $font-weight-body-bold;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   border: 1px solid $color-border;
 }
@@ -1374,7 +1598,7 @@ legend {
 }
 
 button,
-input[type="submit"] {
+input[type='submit'] {
   cursor: pointer;
 }
 
@@ -1415,7 +1639,7 @@ select {
   @include prefix(appearance, none, webkit moz spec);
   background-position: right center;
   background: {
-    image: url('//cdn.shopify.com/s/files/1/0149/1999/1350/t/14/assets/ico-select.svg?v=1245925112819775442');
+    image: url('//cdn.shopify.com/s/files/1/0149/1999/1350/t/16/assets/ico-select.svg?4864');
     repeat: no-repeat;
     position: right 10px center;
     color: transparent;
@@ -1519,7 +1743,8 @@ label[for] {
     widows: 3;
   }
 
-  html, body {
+  html,
+  body {
     background-color: #fff;
     color: #000;
   }
@@ -1603,11 +1828,11 @@ hr {
   margin-bottom: $gutter-site * 0.8;
 }
 
-.index-section--flush + .index-section--flush {
+.shopify-section--full-width + .shopify-section--full-width {
   margin-top: -($gutter-site * 2.5);
 }
 
-.index-section--flush:last-child {
+.shopify-section--full-width:last-child {
   padding-bottom: 0;
   margin-bottom: 0;
 }
@@ -2252,6 +2477,34 @@ $color-blankstate-background: lighten($color-body-text, 55%);
   }
 }
 
+.placeholder-background--hide {
+  display: none;
+}
+
+.placeholder-background--animation {
+  background-color: $color-body-text;
+
+  @include animation(placeholder-background-loading 1.5s infinite linear);
+
+  .no-js & {
+    display: none;
+  }
+}
+
+@include keyframes(placeholder-background-loading) {
+  0% {
+    opacity: 0.02;
+  }
+
+   50% {
+    opacity: 0.05;
+  }
+
+   100% {
+    opacity: 0.02;
+  }
+}
+
 // Theme specific styles for some blank state images
 .featured-card__image .placeholder-svg {
   width: auto;
@@ -2549,7 +2802,7 @@ $slick-opacity-not-active: 0.25;
 
 // Only called once so make sure proper file is grabbed
 @function slick-image-url($url) {
-  @return url(//cdn.shopify.com/s/files/1/0149/1999/1350/t/14/assets/ajax-loader.gif?v=4135686330247201572);
+  @return url(//cdn.shopify.com/s/files/1/0149/1999/1350/t/16/assets/ajax-loader.gif?v=4135686330247201572);
 }
 
 // Unused intentionally
@@ -2844,7 +3097,6 @@ $slick-opacity-not-active: 0.25;
 }
 
 /*================ Menu toggle, Cart, and Search icons ================*/
-
 .site-header__link {
   display: inline-block;
   color: $color-header-links;
@@ -3771,6 +4023,15 @@ html {
   font-size: em($font-size-base - 1);
 }
 
+.product-unit-price {
+  font-size: em(12);
+  color: $color-body-text;
+}
+
+.product-card__unit-price {
+  display: block;
+}
+
 /*================ Product form ================*/
 // Force selects, inputs, and buttons to be the same height,
 // regardless of font-size
@@ -4182,34 +4443,46 @@ html {
 ==============================================================================*/
 .hero-wrapper {
   position: relative;
-  margin-top: -($gutter-site * 1.5);
-
-  @include media-query($medium-up) {
-    margin-top: -($gutter-site * 3);
-  }
 }
 
-.hero-wrapper--adapt {
-  background-color: $color-header; // default background color
-
+.shopify-section--slideshow:first-child {
   .hero {
-    background-color: $color-header;
+    margin-bottom: -30px;
+
+    @include media-query($medium-up) {
+      margin-bottom: -60px;
+    }
+  }
+
+  .hero-wrapper {
+    margin-top: -30px;
+
+    @include media-query($medium-up) {
+      margin-top: -60px;
+    }
+  }
+
+  .hero-wrapper--adapt {
+    background-color: $color-header; // default background color
+
+    .hero {
+      background-color: $color-header;
+      margin-bottom: 50px;
+    }
   }
 }
 
 .hero {
-  background-color: adaptive-color($color-header, 10%); // default background color
   height: 340px;
-  margin-bottom: -($gutter-site * 1.5);
   overflow: hidden;
+  margin-bottom: 0;
 
   @include media-query($medium-up) {
     height: 600px;
-    margin-bottom: -($gutter-site * 3);
   }
 
-  .shopify-section:last-of-type & {
-    margin-bottom: 0;
+  &.hero--adapt {
+    margin-bottom: 50px;
   }
 
   // Make sure slides fill full height
@@ -4228,15 +4501,11 @@ html {
   }
 }
 
-.hero--adapt {
-  margin-bottom: 0;
-}
-
 .hero--adapt-height {
-  max-height: 80vh;
+  max-height: 100vh;
 
   @include media-query($medium-up) {
-    max-height: 55vh;
+    max-height: 80vh;
   }
 }
 
@@ -4253,6 +4522,28 @@ html {
 
   .is-paused & {
     display: table;
+  }
+}
+
+/*=========================== Margins ===========================*/
+
+// Adapt to First Image slideshows after any slideshow section
+// Fixed width section after a slideshow section that is not in first position
+.shopify-section--slideshow:not(:first-child) + .shopify-section--slideshow .hero--adapt,
+.shopify-section--slideshow:not(:first-child) + .shopify-section:not(.shopify-section--full-width) {
+  margin-top: 50px;
+}
+
+// Full-width slideshows after full-width sections
+.shopify-section--full-width + .shopify-section--slideshow .hero:not(.hero--adapt) {
+  margin-top: -50px;
+}
+
+// Adapt to First Image slideshow after slideshow in first position
+.shopify-section--slideshow:first-child + .shopify-section--slideshow .hero--adapt {
+  margin-top: 30px;
+  @include media-query($medium-up) {
+    margin-top: 60px;
   }
 }
 
@@ -4365,7 +4656,7 @@ html {
     bottom: 120px;
 
     .hero-wrapper--adapt & {
-      bottom: $gutter-site * 3;
+      bottom: 60px;
     }
   }
 
@@ -4397,10 +4688,10 @@ html {
 }
 
 .hero-content__inner-text {
-  padding: 0 ($gutter-site / 4);
+  padding: 0 5px;
 
   @include media-query($medium-up) {
-    padding: 0 ($gutter-site * 3);
+    padding: 0 60px;
   }
 }
 
@@ -4409,7 +4700,7 @@ html {
   font-size: em(36);
   line-height: 1.35;
   margin-bottom: $gutter-slideshow;
-  padding: 0 ($gutter-site / 2);
+  padding: 0 10px;
   background-color: $color-hero-title-bg;
   color: $color-hero-title-text;
   @include prefix(box-decoration-break, clone, webkit o spec);
@@ -4436,7 +4727,7 @@ html {
   padding: 0;
 
   @include media-query($medium-up) {
-    padding: 0 ($gutter-site * 3);
+    padding: 0 60px;
   }
 }
 
@@ -4466,7 +4757,6 @@ html {
 }
 
 .hero-content__controls-item {
-  /*tong*/
   background-color: $color-hero-subtitle-bg;
   color: $color-hero-subtitle-text;
   padding: 8px 15px;
@@ -4487,13 +4777,13 @@ html {
 
 .hero-content__controls-item--count {
   padding: 8px 6px;
-  min-width: $gutter-site * 2;
+  min-width: 40px;
   text-align: center;
   font-size: em(12);
   @include justify-content();
 
   @include media-query($medium-up) {
-    padding: ($gutter-site / 2);
+    padding: 10px;
     background: rgba($color-hero-subtitle-bg, .5);
   }
 }
@@ -4517,7 +4807,7 @@ html {
     }
 
     @include media-query($medium-up) {
-      padding: ($gutter-site / 2) 15px;
+      padding: 10px 15px;
     }
   }
 }
@@ -4898,6 +5188,7 @@ html {
   padding-top: $gutter-site / 3;
   padding-bottom: $gutter-site / 3;
   padding-left: $gutter-site / 3;
+  color: $color-heading;
 
   @include media-query($small) {
     width: 100%;
@@ -5108,10 +5399,7 @@ html {
 
 .cart__item-total {
   font-size: 1.2em;
-
-  @include media-query($medium-up) {
-    padding-right: $gutter-site;
-  }
+  display: block;
 }
 
 .cart__subtotal {
@@ -5585,6 +5873,10 @@ body.modal--is-active {
     position: relative;
     top: -1px;
   }
+
+  .shopify-section:first-child & {
+    margin-top: -60px;
+  }
 }
 
 .map-section__full-width {
@@ -5761,7 +6053,7 @@ body.modal--is-active {
   display: block;
   @include display-flexbox();
   justify-content: center;
-  padding: 200px 0px;
+  padding: 100px 20px;
   text-align: center;
   flex: 1;
   background: {
@@ -5779,14 +6071,14 @@ body.modal--is-active {
     right: 0;
     bottom: 0;
     background-color: $color-fixed-black;
-    opacity: 0.2;
+    opacity: 0.4;
     transition: opacity 0.2s ease;
     z-index: 1;
   }
 
   &:hover:after,
   &:hover:focus {
-    opacity: 0.4;
+    opacity: 0.5;
   }
 }
 
@@ -6334,7 +6626,203 @@ body {
   font-size: em(floor($font-size-base * 0.9));
 }
 
+.order-table {
+  border: 1px solid $color-border;
+
+  a {
+    color: $color-body-text;
+  }
+
+  th, td {
+    border: 0;
+  }
+
+  tbody th,
+  tfoot th {
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  tbody tr + tr {
+    border-top: 1px solid $color-border;
+  }
+
+  thead {
+    border-bottom: 1px solid $color-body-text;
+  }
+
+  tfoot {
+    border-top: 1px solid $color-body-text;
+
+    tr {
+      &:first-child th,
+      &:first-child td {
+        padding-top: 1.25em;
+      }
+
+      &:nth-last-child(2) th,
+      &:nth-last-child(2) td {
+        padding-bottom: 1.25em;
+      }
+
+      &:last-child th,
+      &:last-child td {
+        border-top: 1px solid $color-body-text;
+        font-weight: $font-weight-body-bold;
+        padding-top: 1.25em;
+        padding-bottom: 1.25em;
+      }
+    }
+  }
+
+  @include media-query($medium-up) {
+
+    tbody {
+      tr {
+        &:first-child th,
+        &:first-child td {
+          padding-top: 1.25em;
+        }
+
+        &:last-child th,
+        &:last-child td {
+          padding-bottom: 1.25em;
+
+          .order-discount--list {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    tfoot {
+      tr {
+        td, th {
+          vertical-align: bottom;
+        }
+      }
+    }
+  }
+
+  @include media-query($small) {
+    border: 0;
+
+    thead {
+      display: none;
+    }
+
+    th,
+    td {
+      float: left;
+      clear: left;
+      width: 100%;
+      text-align: right;
+      padding: 0.5rem 0;
+      border: 0;
+      margin: 0;
+    }
+
+    th::before,
+    td::before {
+      content: attr(data-label);
+      float: left;
+      text-align: left;
+      padding-right: 2em;
+      max-width: 80%;
+    }
+
+    tbody {
+      tr {
+        th:first-child {
+          padding-top: 1.25em;
+        }
+        td:last-child {
+          padding-bottom: 1.25em;
+        }
+      }
+
+      th::before,
+      td::before {
+        font-weight: $font-weight-body-bold;
+      }
+    }
+  }
+}
+
+.order-table__product {
+  @include media-query($small) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.order-discount {
+  text-transform: uppercase;
+  color: $color-accent;
+  display: block;
+  line-height: 1.2em;
+
+  .icon-saletag {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.4em;
+  }
+}
+
+.order-discount--cart {
+  font-size: 0.9em;
+}
+
+.order-discount--title {
+  word-break: break-word;
+  padding-right: 1em;
+}
+
+.order-discount--list {
+  margin: 0.8em 0 0.6em 1.3em;
+  list-style: none;
+  padding: 0;
+}
+
+.order-discount__item {
+  text-indent: -1.3em;
+
+  & + .order-discount__item {
+    margin-top: 0.6em;
+  }
+}
+
+.order-discount-wrapper {
+  @include media-query($small) {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.order-discount-cart-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: $gutter-site 0 5px 0;
+
+  @include media-query($medium-up) {
+    justify-content: flex-end;
+  }
+}
+
+.product-recommendations {
+  background-color: $color_body;
+  margin-bottom: $gutter-site * -2;
+  padding: ($gutter-site * 4) 0;
+
+  @include media-query($medium-up) {
+    margin-bottom: $gutter-site * -4;
+  }
+}
 /*tong*/
 #shopify-section-1555537615813{
   margin-top: 16px;  
 }
+
