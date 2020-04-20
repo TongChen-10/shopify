@@ -1824,7 +1824,8 @@ hr {
 
 /*================ Index sections ================*/
 .index-section {
-  margin-bottom: $gutter-site * 2.5;
+  /*tong*/
+  margin-bottom: $gutter-site * 0.8;
 }
 
 .shopify-section--full-width + .shopify-section--full-width {
@@ -6059,7 +6060,8 @@ body.modal--is-active {
     size: cover;
     position: top center;
   }
-
+  /*tong*/
+  margin : 0px 8px;
   &:after {
     content: '';
     display: block;
@@ -6818,5 +6820,9 @@ body {
   @include media-query($medium-up) {
     margin-bottom: $gutter-site * -4;
   }
+}
+/*tong*/
+#shopify-section-1555537615813{
+  margin-top: 16px;  
 }
 

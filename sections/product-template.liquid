@@ -75,6 +75,9 @@
           </script>
         {% endif %}
       </div>
+      <div class="rte product-single__description" itemprop="description">
+        {{ product.description }}
+      </div>
     </div>
 
     <div class="grid__item {% if product.images.size > 1 %}medium-up--two-fifths{% else %}medium-up--one-half{% endif %}" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -210,10 +213,7 @@
         {% endform %}
 
         <hr>
-
-        <div class="rte product-single__description" itemprop="description">
-          {{ product.description }}
-        </div>
+        <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
 
         {% if section.settings.social_sharing_products %}
           <hr>

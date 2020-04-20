@@ -12,7 +12,7 @@
   {%- else -%}
     {%- assign min_aspect_ratio = first_block.settings.image.aspect_ratio -%}
   {%- endif -%}
-  {% assign wrapper_height = 100 | divided_by: min_aspect_ratio %}
+  {% assign wrapper_height = 300 | divided_by: min_aspect_ratio %}
 {%- endif -%}
 
 {% if section.blocks.size > 0 %}
