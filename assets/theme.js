@@ -3928,4 +3928,11 @@ theme.productCardImageLoadingAnimation = function() {
   onLoadHideLazysizesAnimation();
 };
 
+//tong
+$('.shopify-currency-form select').on('change', function() {
+  $(this)
+    .parents('form')
+    .submit();
+});
+
 $(theme.init);
