@@ -1640,7 +1640,7 @@ select {
   @include prefix(appearance, none, webkit moz spec);
   background-position: right center;
   background: {
-    image: url('//cdn.shopify.com/s/files/1/0149/1999/1350/t/19/assets/ico-select.svg?v=1245925112819775442');
+    image: url('//cdn.shopify.com/s/files/1/0149/1999/1350/t/21/assets/ico-select.svg?v=1245925112819775442');
     repeat: no-repeat;
     position: right 10px center;
     color: transparent;
@@ -2802,7 +2802,7 @@ $slick-opacity-not-active: 0.25;
 
 // Only called once so make sure proper file is grabbed
 @function slick-image-url($url) {
-  @return url(//cdn.shopify.com/s/files/1/0149/1999/1350/t/19/assets/ajax-loader.gif?v=4135686330247201572);
+  @return url(//cdn.shopify.com/s/files/1/0149/1999/1350/t/21/assets/ajax-loader.gif?v=4135686330247201572);
 }
 
 // Unused intentionally
@@ -3965,10 +3965,11 @@ html {
 }
 
 .product-single {
-  margin-bottom: $gutter-site * 2;
+  //tong
+  margin-bottom: $gutter-site;
 
   @include media-query($medium-up) {
-    margin-bottom: $gutter-site * 4;
+    margin-bottom: $gutter-site * 2;
   }
 }
 
@@ -6812,11 +6813,11 @@ body {
     justify-content: flex-end;
   }
 }
-
 .product-recommendations {
   background-color: $color_body;
   margin-bottom: $gutter-site * -2;
-  padding: ($gutter-site * 4) 0;
+  //tong
+  padding: ($gutter-site * 2) 0;
 
   @include media-query($medium-up) {
     margin-bottom: $gutter-site * -4;
@@ -6837,4 +6838,9 @@ body {
   &:focus {
     color: $color-header-links;
   }
+}
+
+.product-single__description{
+	min-width: 0;
+    margin: 0 20px;
 }

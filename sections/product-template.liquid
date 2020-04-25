@@ -75,11 +75,7 @@
           </script>
         {% endif %}
       </div>
-      <div class="rte product-single__description" itemprop="description">
-         {{ product.description }}
-      </div>
     </div>
-
     <div class="grid__item {% if product.images.size > 1 %}medium-up--two-fifths{% else %}medium-up--one-half{% endif %}" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
       <div class="product-single__info-wrapper">
         <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
@@ -211,10 +207,17 @@
             {% endif %}
           </div>
         {% endform %}
-        <hr>
-        <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+    </div>
+  </div>
+    <div class="grid__item {% if product.images.size > 1 %}medium-up--three-fifths{% else %}medium-up--one-half{% endif %}">
+      <div class="rte product-single__description" itemprop="description">
+           {{ product.description }}
+      </div>  
+    </div>
+    <div class="grid__item {% if product.images.size > 1 %}medium-up--two-fifths{% else %}medium-up--one-half{% endif %}">
+    <div class="product-single__info-wrapper">
+      <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
         {% if section.settings.social_sharing_products %}
-          <hr>
           {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
         {% endif %}
       </div>
